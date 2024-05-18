@@ -6,12 +6,17 @@ nav {
 #logo {
     height: 60px;
     width: 60px;
-    padding-left: 100px;
-    padding-right: 70px;
+    margin-left: 100px;
+    margin-right: 70px;
 }
+
+a:hover img {
+    outline: 2px solid blue;
+    border-radius: 30px;
+  }
 
 #signature {
     height: 30px;
     width: 150px;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
