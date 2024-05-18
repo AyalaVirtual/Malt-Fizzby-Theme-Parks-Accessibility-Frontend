@@ -41,7 +41,8 @@ I acknowledge and respect the intellectual property rights of The Walt Disney Co
 
 ## Technologies Used 
 
-* Angular 16.2.0 (Frontend library for building user interface)
+* Angular 16.2.0 (Frontend library for building user interface) 
+* TypeScript 
 * HTML
 * CSS
 * VS Code 
