@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs';
+import { ParkAccessibility } from '../park-accessibility/park-accessibility.model';
+
 
 
 // This means the app is already aware of it, so it's already available 
@@ -34,6 +36,12 @@ export class ParkService {
   */
     getParkById(id : number) : Observable<any> {
       return this.http.get(`${this.apiUrl}/parks/${id}/`);
+    }
+
+
+    getParkAccessibility(parkId: number): Observable<ParkAccessibility> {
+      const url = `${this.apiUrl}/parks/${parkId}/parkAccessibility`;
+      return this.http.get<ParkAccessibility>(url);
     }
 
 }

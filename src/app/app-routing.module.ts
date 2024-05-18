@@ -4,26 +4,29 @@ import { ParksComponent } from './parks/parks.component';
 import { AttractionsComponent } from './attractions/attractions.component';
 import { ParkAccessibilityComponent } from './park-accessibility/park-accessibility.component';
 import { AttractionAccessibilityComponent } from './attraction-accessibility/attraction-accessibility.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { ParkPreviewComponent } from './park-preview/park-preview.component';
 
 
 export const routes: Routes = [
     {
         path: '',
-        component: ParksComponent
+        redirectTo: 'parks',
+        pathMatch: 'full',
     },
     {
-        path: 'parkaccessibility',
-        component: ParkAccessibilityComponent
+        path: '',
+        component: ParksComponent,
     },
     {
-        path: 'attractions',
-        component: AttractionsComponent
+        path: ':parkId/parkaccessibility/:parkAccessibilityId',
+        component: ParkAccessibilityComponent,
     },
     {
-        path: 'attractionaccessibility',
-        component: AttractionAccessibilityComponent
+        path: 'parks/:parkId/attractions/',
+        component: AttractionsComponent,
+    },
+    {
+        path: 'parks/:parkId/attractions/:attractionId/attractionaccessibility/:attractionAccessibilityId',
+        component: AttractionAccessibilityComponent,
     }
 ];
 

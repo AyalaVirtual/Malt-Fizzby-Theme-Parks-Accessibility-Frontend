@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ParkService } from './park.service';
 import {ActivatedRoute } from '@angular/router';
+import { ParkAccessibility } from '../park-accessibility/park-accessibility.model';
 
 
 export type Park = {
@@ -10,6 +11,7 @@ export type Park = {
   description : String;
   latitude : number;
   longitude : number;
+  parkAccessibility : ParkAccessibility;
 }
 
 
@@ -22,8 +24,9 @@ export type Park = {
 
 export class ParksComponent implements OnInit {
   // This declares a property to store parks 
-  parks : any[] = [];
+  parks : Park[] = [];
   park : any;
+  parkAccessibility: ParkAccessibility | null = null; 
   
 
   constructor(private parkService : ParkService, private route: ActivatedRoute) {}
@@ -57,5 +60,13 @@ export class ParksComponent implements OnInit {
         }
       )
     }
+
+  getParkAccessibility(id: number) : void {
+    this.parkService.getParkAccessibility(id)
+  .subscribe((accessibilityData: ParkAccessibility) => {
+    // Update component state with fetched accessibility data
+    this.parkAccessibility = accessibilityData;
+    });
+  }
 
 }
