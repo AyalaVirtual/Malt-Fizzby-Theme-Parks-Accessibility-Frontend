@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { ParksRoutingModule } from './parks/parks-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ParksComponent } from './parks/parks.component';
@@ -25,9 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    ParksRoutingModule,
-    // AttractionsRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ParkService } from '../parks/park.service';
 import { ParkAccessibilityService } from '../park-accessibility/park-accessibility.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 export type Park = {
@@ -38,10 +39,24 @@ export type ParkAccessibility = {
 })
 export class ParkPreviewComponent {
   @Input() park: any;
+  @Input() parkAccessibility: any;
+  
 
-  get parkAccessibilityId() {
-    // Access nested parkAccessibility if it exists
-    console.log(this.park?.id);
-    return this.park?.id.parkAccessibility?.id; // Optional chaining for null safety
+  constructor(private parkService : ParkService, private route: ActivatedRoute) {}
+
+
+  // get parkAccessibilityId() {
+  //   console.log('Park ID:', this.park?.id);
+  //   console.log('Park Accessibility ID:', this.parkAccessibility?.id);
+  //   return this.park?.id.parkAccessibility?.id;
+  // }
+
+
+  getParkAccessibilityByParkIdAndId(parkId: number, parkAccessibilityId : number) {
+    this.parkService.getParkAccessibilityByParkIdAndId(+parkId, +parkAccessibilityId)
+      .subscribe((parkAccessibility) => {
+        this.parkAccessibility = parkAccessibility.data;
+      });
   }
+
 }

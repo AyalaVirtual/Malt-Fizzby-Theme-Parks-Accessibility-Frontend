@@ -40,10 +40,10 @@ export class ParksComponent implements OnInit {
   /*
     This retrieves the ID from the URL route parameters using the "snapshot" of the ActivatedRoute service. It then checks if the ID is not empty. If it is not empty, it calls the getParkById() method of the park service, passing the ID as a parameter. This method returns an observable that emits the park data. It then uses the "subscribe" method on the observable to handle the emitted park data and stores it in the "park" property of the component.
   */
-    let id = this.route.snapshot.paramMap.get('id') || '';
+    let parkId = this.route.snapshot.paramMap.get('parkId') || '';
     
-    if (id) {
-      this.parkService.getParkById(+id)
+    if (parkId) {
+      this.parkService.getParkById(+parkId)
         .subscribe((park) => {
           this.park = park.data;
       });

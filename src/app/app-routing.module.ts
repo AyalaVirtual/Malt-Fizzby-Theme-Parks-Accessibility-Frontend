@@ -17,16 +17,16 @@ export const routes: Routes = [
         component: ParksComponent,
     },
     {
-        path: 'parks/:parkId/parkaccessibility/:parkAccessibilityId',
-        component: ParkAccessibilityComponent,
+        path: 'parks/:parkId/attractions',
+        component: AttractionsComponent
     },
     {
-        path: 'parks/:parkId/attractions',
-        component: AttractionsComponent,
+        path: 'parks/:parkId/parkaccessibility/:parkAccessibilityId',
+        component: ParkAccessibilityComponent
     },
     {
         path: 'parks/:parkId/attractions/:attractionId/attractionaccessibility/:attractionAccessibilityId',
-        component: AttractionAccessibilityComponent,
+        component: AttractionAccessibilityComponent
     }
 ];
 
