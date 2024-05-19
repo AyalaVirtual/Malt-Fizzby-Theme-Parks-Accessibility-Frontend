@@ -26,7 +26,7 @@ export class ParksComponent implements OnInit {
   // This declares a property to store parks 
   parks : Park[] = [];
   park : any;
-  parkAccessibility: ParkAccessibility | null = null; 
+  parkAccessibility: any; 
   
 
   constructor(private parkService : ParkService, private route: ActivatedRoute) {}

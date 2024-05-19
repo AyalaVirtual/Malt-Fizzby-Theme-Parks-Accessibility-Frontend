@@ -1,0 +1,19 @@
+<nav>
+    <a routerLink="/parks">
+        <img src="../../assets/images/Malt-Fizzby-Logo.png" alt="Malt Fizzby World Logo" id="logo">
+    </a>
+
+    <img src="../../assets/images/navbar-signature-removebg.png" alt="Malt Fizzby World Signature" id="signature">
+
+
+
+    <a [routerLink]="['/parks', park?.id, 'attractions']">
+        <!-- Create and use variable for button img src attribute to change for each park -->
+        <button>
+            View <img src="../assets/images/magic-kingdom-icon.png" alt="button icon" id="button-img"> Attractions
+        </button>
+    </a>
+</nav>
+
+
+<router-outlet></router-outlet>

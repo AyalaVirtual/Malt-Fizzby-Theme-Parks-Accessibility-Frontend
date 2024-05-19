@@ -35,7 +35,7 @@ export class ParkAccessibilityComponent implements OnInit {
 
   ngOnInit() {
     // This extracts parkId and parkAccessibilityId from route parameters
-    const parkId = this.route.snapshot.paramMap.get('parkId')  || '';
+    const parkId = this.route.snapshot.paramMap.get('parkId');
     const parkAccessibilityId = this.route.snapshot.paramMap.get('parkAccessibilityId');
 
     if (parkId && parkAccessibilityId) {

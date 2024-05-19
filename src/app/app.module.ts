@@ -9,6 +9,7 @@ import { ParkAccessibilityComponent } from './park-accessibility/park-accessibil
 import { AttractionsComponent } from './attractions/attractions.component';
 import { AttractionAccessibilityComponent } from './attraction-accessibility/attraction-accessibility.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NavbarButtonComponent } from './navbar-button/navbar-button.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     ParkAccessibilityComponent,
     AttractionsComponent,
     AttractionAccessibilityComponent,
+    NavbarButtonComponent,
   ],
   imports: [
     BrowserModule,
