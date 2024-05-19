@@ -22,7 +22,7 @@ export class ParkAccessibilityService {
 
 
   getParkAccessibilityByParkIdAndId(parkId : number, parkAccessibilityId : number) : Observable<any> {
-    return this.http.get(`${this.apiUrl}/parks/${parkId}/park-accessibility/${parkAccessibilityId}/`);
+    return this.http.get(`${this.apiUrl}/parks/${parkId}/parkaccessibility/${parkAccessibilityId}/`);
   }
   
 }
