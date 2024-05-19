@@ -1,11 +1,11 @@
 app-navbar {
-    position: relative;
+    position: relative; /* Allows 'View Attractions' button to be positioned on top of navbar */
 }
 
 button {
     height: 40px;
     border-radius: 25px;
-    position: absolute;
+    position: absolute; /* Allows 'View Attractions' button to be positioned on top of navbar */
     top: 20px;
     right: 100px;
     padding-left: 50px;
@@ -13,8 +13,8 @@ button {
     font-size: 16px;
     font-family: 'BubblegumSans-Regular';
     background-color: lightblue;
-    display: flex; /* Enable flexbox for positioning */
-    align-items: center; /* Vertically center the content by default */
+    display: flex;
+    align-items: center;
 }
 
 button:hover {
@@ -67,7 +67,6 @@ ul, li {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-
 
 .map {
     margin-top: 100px;
