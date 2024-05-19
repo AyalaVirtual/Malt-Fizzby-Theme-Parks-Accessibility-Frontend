@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-// import { ParkAccessibility } from './park-accessibility.model';
 import { ParkAccessibilityService } from './park-accessibility.service';
+import { Park } from '../parks/parks.component';
 
 
 export type ParkAccessibility = {
-  // Define the structure of your ParkAccessibility model based on your API response
-  id: number;
-  rentalLocations: string[];
-  wheelchairReplacementLocations: string[];
-  breakLocations: string[];
-  stationaryBrailleMapLocations: string[];
-  signLanguageSchedule: string;
-  guestRelationsLocations: string[];
-  serviceAnimalRestrictions_Ride: string[];
-  serviceAnimalRestrictions_Board: string[];
-  serviceAnimalReliefAreas: string[];
-  companionRestroomLocations: string[];
-  firstAidLocations: string;
+  id : number;
+  rentalLocations : string[];
+  wheelchairReplacementLocations : string[];
+  breakLocations : string[];
+  stationaryBrailleMapLocations : string[];
+  signLanguageSchedule : string;
+  guestRelationsLocations : string[];
+  serviceAnimalRestrictions_Ride : string[];
+  serviceAnimalRestrictions_Board : string[];
+  serviceAnimalReliefAreas : string[];
+  companionRestroomLocations : string[];
+  firstAidLocations : string;
+  park : Park;
 }
 
 @Component({
@@ -26,22 +26,24 @@ export type ParkAccessibility = {
   styleUrls: ['./park-accessibility.component.css']
 })
 export class ParkAccessibilityComponent implements OnInit {
+  // This declares a property to store a park's accessibility details 
+  parkAccessibility : any;
 
-  parkAccessibility: ParkAccessibility | null = null;
 
-  constructor(private parkAccessibilityService: ParkAccessibilityService, private route: ActivatedRoute) {}
+  constructor(private parkAccessibilityService : ParkAccessibilityService, private route : ActivatedRoute) {}
 
-  ngOnInit(): void {
-    // Extract parkId and parkAccessibilityId from route parameters
-    const parkId = this.route.snapshot.paramMap.get('id'  || '');
+
+  ngOnInit() {
+    // This extracts parkId and parkAccessibilityId from route parameters
+    const parkId = this.route.snapshot.paramMap.get('parkId')  || '';
     const parkAccessibilityId = this.route.snapshot.paramMap.get('parkAccessibilityId');
 
     if (parkId && parkAccessibilityId) {
-      // Fetch accessibility data using service
-      this.parkAccessibilityService.getParkAccessibility(parkId, parkAccessibilityId)
-        .subscribe((accessibilityData: ParkAccessibility) => {
-          this.parkAccessibility = accessibilityData;
+      this.parkAccessibilityService.getParkAccessibilityByParkIdAndId(+parkId, +parkAccessibilityId)
+        .subscribe((parkAccessibility) => {
+          this.parkAccessibility = parkAccessibility.data;
         });
     }
   }
+  
 }

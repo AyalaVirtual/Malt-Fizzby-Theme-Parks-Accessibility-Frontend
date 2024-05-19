@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ParkService } from './park.service';
 import {ActivatedRoute } from '@angular/router';
-import { ParkAccessibility } from '../park-accessibility/park-accessibility.model';
+import { ParkAccessibility } from '../park-accessibility/park-accessibility.component';
 
 
 export type Park = {
@@ -37,8 +37,8 @@ export class ParksComponent implements OnInit {
     this.fetchParks();
 
 
-    /*
-    This retrieves the ID from the URL route parameters using the "snapshot" of the ActivatedRoute service. It then checks if the ID is not empty. If it is not empty, it calls the "getParkById" method of the "parkService" service, passing the ID as a parameter. This method returns an observable that emits the park data. It then uses the "subscribe" method on the observable to handle the emitted park data and stores it in the "park" property of the component.
+  /*
+    This retrieves the ID from the URL route parameters using the "snapshot" of the ActivatedRoute service. It then checks if the ID is not empty. If it is not empty, it calls the getParkById() method of the park service, passing the ID as a parameter. This method returns an observable that emits the park data. It then uses the "subscribe" method on the observable to handle the emitted park data and stores it in the "park" property of the component.
   */
     let id = this.route.snapshot.paramMap.get('id') || '';
     
@@ -51,22 +51,22 @@ export class ParksComponent implements OnInit {
 }
 
   /* 
-    This method fetches the parks from the park service by calling the getAllParks() function from the park service.  This returns an observable that the .subscribe() method is used to subscribe to so that when a response is received, the parks property of the component is assigned the data retrieved from the response. As a result, whenever a new park is created, the list of parks is updated.
+    This method fetches the parks by calling the getAllParks() function from the park service.  This returns an observable that the .subscribe() method is used to subscribe to so that when a response is received, the parks property of the component is assigned the data retrieved from the response. As a result, whenever a new park is created, the list of parks is updated.
   */
-    fetchParks(): void {
-      this.parkService.getAllParks().subscribe(
-        (response : any) => {
-          this.parks = response.data;
-        }
-      )
-    }
+  fetchParks(): void {
+    this.parkService.getAllParks().subscribe(
+      (response : any) => {
+        this.parks = response.data;
+      }
+    )
+  }
 
-  getParkAccessibility(id: number) : void {
-    this.parkService.getParkAccessibility(id)
-  .subscribe((accessibilityData: ParkAccessibility) => {
-    // Update component state with fetched accessibility data
-    this.parkAccessibility = accessibilityData;
-    });
+
+  getParkAccessibilityByParkIdAndId(parkId: number, parkAccessibilityId : number) {
+    this.parkService.getParkAccessibilityByParkIdAndId(+parkId, +parkAccessibilityId)
+      .subscribe((parkAccessibility) => {
+        this.parkAccessibility = parkAccessibility.data;
+      });
   }
 
 }

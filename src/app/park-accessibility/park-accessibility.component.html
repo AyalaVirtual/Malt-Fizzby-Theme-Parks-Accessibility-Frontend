@@ -1,16 +1,18 @@
 <div class="navbar">
     <app-navbar />
 
-    <!-- Create and use variable for button img src attribute to change for each park -->
-    <button>View <img src="../assets/images/magic-kingdom-icon.png" alt="button icon" id="button-img"> Attractions</button>
+    <a routerLink="['parks', park.id, 'attractions']">
+        <!-- Create and use variable for button img src attribute to change for each park -->
+        <button>
+            View <img src="../assets/images/magic-kingdom-icon.png" alt="button icon" id="button-img"> Attractions
+        </button>
+    </a>
 </div>
 
-<div class="img-container">
-    <!-- <img src="" alt="" > -->
-</div>
+<div class="img-container"></div>
 
 <!-- Add {{ park.name }}  -->
-<h1>Accessibility Information</h1>
+<h1> Park Accessibility Information</h1>
 
 <p id="intro">
     Guests are encouraged to download the free My Disney Experience app to their smartphone or tablet prior to their visit. This app provides access to information including real-time attraction wait times, entertainment times, and lets you make dining reservations. Additional information about services for Guests with disabilities can be found by visiting <a href="http://www.disneyworld.com">www.disneyworld.com</a>, which also offers a chat feature, or by e-mailing <a href="mailto:Disability.Services@disneyparks.com">Disability.Services@disneyparks.com</a>.
@@ -341,6 +343,9 @@
     </div>
 </div>
 
-<div  class="map">
+<div class="map">
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3509.0144449304867!2d-81.58434382625774!3d28.41882099375668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88dd7e536aa54b81%3A0x66b8bcd58da841a!2sMagic%20Kingdom%20Park!5e0!3m2!1sen!2sus!4v1716062497281!5m2!1sen!2sus" width="1250" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
+
+
+<router-outlet></router-outlet>

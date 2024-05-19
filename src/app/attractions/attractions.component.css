@@ -1,0 +1,22 @@
+h1 {
+    text-align: center;
+    margin: 100px;
+}
+
+.attractions-list {
+    display: flex; /* Enables flexbox for column layout */
+    flex-wrap: wrap; /* Wraps list items to multiple columns */
+    list-style: none; /* Removes default bullet points */
+    margin: 0;
+    padding: 0;
+    margin-bottom: 50px;
+}
+  
+.attractions-list li {
+    width: 25%; /* Sets width for each list item (adjust for 4 columns) */
+}
+  
+.map {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}

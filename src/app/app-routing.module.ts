@@ -17,11 +17,11 @@ export const routes: Routes = [
         component: ParksComponent,
     },
     {
-        path: 'parks/:parkId/parkaccessibility/:parkAccessibilityId/',
+        path: 'parks/:parkId/parkaccessibility/:parkAccessibilityId',
         component: ParkAccessibilityComponent,
     },
     {
-        path: 'parks/:parkId/attractions/',
+        path: 'parks/:parkId/attractions',
         component: AttractionsComponent,
     },
     {
