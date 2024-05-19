@@ -3,13 +3,73 @@ app-navbar {
 }
 
 button {
-    height: 30px;
-    border-radius: 15px;
+    height: 40px;
+    border-radius: 25px;
     position: absolute;
-    top: 50px;
+    top: 20px;
     right: 100px;
+    padding-left: 50px;
+    padding-right: 50px;
+    font-size: 16px;
+    font-family: 'BubblegumSans-Regular';
+    background-color: lightblue;
+    display: flex; /* Enable flexbox for positioning */
+    align-items: center; /* Vertically center the content by default */
 }
 
 button:hover {
-    outline: 1px solid blue;
+    outline: 2px solid blue;
 }
+
+#button-img {
+    height: 30px;
+    width: 22px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.img-container {
+    width: 100%;
+    height: 200px;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMZ11kFCwAE1zgjhvdRlG1s_HqaiaOmtr5GA&s");
+    overflow: hidden;
+    background-position: center;
+}
+
+h1 {
+    text-align: center;
+    margin: 70px;
+}
+
+#intro {
+    margin: 50px;
+}
+
+p {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+.text-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Defines two columns of equal width */
+    gap: 10px; /* Adds spacing between columns */
+    margin: 50px;
+}
+  
+.column1, .column2 {
+    padding: 10px;
+    text-align: justify;
+}
+
+ul, li {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.map {
+    margin-top: 100px;
+}
+  

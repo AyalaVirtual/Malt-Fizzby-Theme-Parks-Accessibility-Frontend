@@ -3,13 +3,28 @@ app-navbar {
 }
 
 button {
-    height: 30px;
-    border-radius: 15px;
+    height: 40px;
+    border-radius: 25px;
     position: absolute;
-    top: 50px;
+    top: 20px;
     right: 100px;
+    padding-left: 50px;
+    padding-right: 50px;
+    font-size: 16px;
+    font-family: 'BubblegumSans-Regular';
+    background-color: lightblue;
+    display: flex; /* Enable flexbox for positioning */
+    align-items: center; /* Vertically center the content by default */
 }
 
 button:hover {
-    outline: 1px solid blue;
+    outline: 2px solid blue;
 }
+
+#button-img {
+    height: 30px;
+    width: 22px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
