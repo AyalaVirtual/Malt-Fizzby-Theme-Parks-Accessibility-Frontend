@@ -13,11 +13,11 @@ export const routes: Routes = [
         pathMatch: 'full',
     },
     {
-        path: '',
+        path: 'parks',
         component: ParksComponent,
     },
     {
-        path: ':parkId/parkaccessibility/:parkAccessibilityId',
+        path: 'parks/:parkId/parkaccessibility/:parkAccessibilityId/',
         component: ParkAccessibilityComponent,
     },
     {

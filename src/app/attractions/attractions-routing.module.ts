@@ -6,18 +6,19 @@ import { AttractionsComponent } from "../attractions/attractions.component";
 import { AttractionAccessibilityComponent } from "../attraction-accessibility/attraction-accessibility.component";
 
 
-export const parksRoutes: Routes = [
+export const attractionsRoutes: Routes = [
     // This sets the path to the component 
+    {
+        path: '',
+        redirectTo: 'parks',
+        pathMatch: 'full',
+    },
     {
         path: 'parks',
         component: ParksComponent,
     },
     {
-        path: 'parks/:parkId/parkaccessibility/:parkAccessibilityId/',
-        component: ParkAccessibilityComponent,
-    },
-    {
-        path: 'parks/:parkId/attractions/',
+        path: 'parks/:parkId/attractions',
         component: AttractionsComponent,
     },
     {
@@ -28,7 +29,7 @@ export const parksRoutes: Routes = [
 
 
 @NgModule({
-    imports: [RouterModule.forChild(parksRoutes)],
+    imports: [RouterModule.forChild(attractionsRoutes)],
     exports: [RouterModule]
 })
-export class ParksRoutingModule {}
+export class AttractionsRoutingModule {}

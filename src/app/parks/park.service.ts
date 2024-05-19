@@ -40,7 +40,7 @@ export class ParkService {
 
 
     getParkAccessibility(parkId: number): Observable<ParkAccessibility> {
-      const url = `${this.apiUrl}/parks/${parkId}/parkAccessibility`;
+      const url = `${this.apiUrl}/parks/${parkId}/parkAccessibility/`;
       return this.http.get<ParkAccessibility>(url);
     }
 
