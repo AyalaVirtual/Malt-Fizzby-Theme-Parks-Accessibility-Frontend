@@ -2,16 +2,19 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ParkService } from './park.service';
 import {ActivatedRoute } from '@angular/router';
 import { ParkAccessibility } from '../park-accessibility/park-accessibility.component';
+import { Attraction } from '../attractions/attractions.component';
+import { AttractionAccessibility } from '../attraction-accessibility/attraction-accessibility.component';
 
 
 export type Park = {
-  id : number;
+  id : any;
   name : String;
   imageUrl : String;
   description : String;
   latitude : number;
   longitude : number;
   parkAccessibility : ParkAccessibility;
+  attractions : Attraction[];
 }
 
 
@@ -26,10 +29,11 @@ export class ParksComponent implements OnInit {
   // This declares a property to store parks 
   parks : Park[] = [];
   park : any;
-  parkAccessibility: any; 
+  parkAccessibility: any;
   
 
-  constructor(private parkService : ParkService, private route: ActivatedRoute) {}
+  constructor(private parkService : ParkService, private route: ActivatedRoute) {
+  }
 
 
   // This method is called when the component is initialized. Within this method, the fetchParks() function is called to retrieve the parks. 
@@ -41,9 +45,10 @@ export class ParksComponent implements OnInit {
     This retrieves the ID from the URL route parameters using the "snapshot" of the ActivatedRoute service. It then checks if the ID is not empty. If it is not empty, it calls the getParkById() method of the park service, passing the ID as a parameter. This method returns an observable that emits the park data. It then uses the "subscribe" method on the observable to handle the emitted park data and stores it in the "park" property of the component.
   */
     let parkId = this.route.snapshot.paramMap.get('parkId') || '';
+    let parkAccessibilityId = this.route.snapshot.paramMap.get('parkAccessibilityId') || '';
     
     if (parkId) {
-      this.parkService.getParkById(+parkId)
+      this.parkService.getParkById(parkId)
         .subscribe((park) => {
           this.park = park.data;
       });
@@ -62,11 +67,12 @@ export class ParksComponent implements OnInit {
   }
 
 
-  getParkAccessibilityByParkIdAndId(parkId: number, parkAccessibilityId : number) {
-    this.parkService.getParkAccessibilityByParkIdAndId(+parkId, +parkAccessibilityId)
+  getParkAccessibilityByParkIdAndId(parkId: any, parkAccessibilityId : any) {
+    this.parkService.getParkAccessibilityByParkIdAndId(parkId, parkAccessibilityId)
       .subscribe((parkAccessibility) => {
         this.parkAccessibility = parkAccessibility.data;
       });
   }
+
 
 }

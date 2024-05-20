@@ -23,7 +23,7 @@ export class AttractionService {
   /* 
     This function takes an id parameter of type 'number' and returns an Observable object (which are used to handle asynchronous data streams) that represents the HTTP response from the API. It then sends an HTTP GET request to the specified URL, which includes the id parameter to retrieve the specific park from the API.
   */
-  getParkById(parkId : number) : Observable<any> {
+  getParkById(parkId : any) : Observable<any> {
     return this.http.get(`${this.apiUrl}/parks/${parkId}/`);
   }
 
@@ -31,17 +31,17 @@ export class AttractionService {
   /* 
     This function takes an id parameter of type 'number' and returns an Observable object (which are used to handle asynchronous data streams) that represents the HTTP response from the API. It then sends an HTTP GET request to the specified URL, which includes the id parameter to retrieve all available attractions for a specific park from the API.
   */
-  getAllAttractionsByParkId(parkId : number) : Observable<any> {
+  getAllAttractionsByParkId(parkId : any) : Observable<any> {
     return this.http.get(`${this.apiUrl}/parks/${parkId}/attractions/`);
   }
 
 
-  getAttractionByParkIdAndId(parkId : number, attractionId : number) : Observable<any> {
+  getAttractionByParkIdAndId(parkId : any, attractionId : any) : Observable<any> {
     return this.http.get(`${this.apiUrl}/parks/${parkId}/attractions/${attractionId}/`);
   }
 
 
-  getAttractionAccessibilityByAttractionIdAndId(attractionId : number, attractionAccessibilityId : number) : Observable<any> {
+  getAttractionAccessibilityByAttractionIdAndId(attractionId : any, attractionAccessibilityId : number) : Observable<any> {
     return this.route.paramMap.pipe(
       switchMap((params : ParamMap) => {
         const parkId = params.get('parkId');

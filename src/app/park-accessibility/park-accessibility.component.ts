@@ -5,7 +5,7 @@ import { Park } from '../parks/parks.component';
 
 
 export type ParkAccessibility = {
-  id : number;
+  id : any;
   rentalLocations : string[];
   wheelchairReplacementLocations : string[];
   breakLocations : string[];
@@ -26,7 +26,7 @@ export type ParkAccessibility = {
   styleUrls: ['./park-accessibility.component.css']
 })
 export class ParkAccessibilityComponent implements OnInit {
-  // This declares a property to store a park's accessibility details 
+  park : any;
   parkAccessibility : any;
 
 
@@ -39,7 +39,7 @@ export class ParkAccessibilityComponent implements OnInit {
     const parkAccessibilityId = this.route.snapshot.paramMap.get('parkAccessibilityId') || '';
 
     if (parkId && parkAccessibilityId) {
-      this.parkAccessibilityService.getParkAccessibilityByParkIdAndId(+parkId, +parkAccessibilityId)
+      this.parkAccessibilityService.getParkAccessibilityByParkIdAndId(parkId, parkAccessibilityId)
         .subscribe((parkAccessibility) => {
           this.parkAccessibility = parkAccessibility.data;
         });

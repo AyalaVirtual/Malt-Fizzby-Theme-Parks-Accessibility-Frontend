@@ -31,7 +31,7 @@ export class AttractionAccessibilityComponent implements OnInit {
   ngOnInit() {
     // This extracts attractionId and attractionAccessibilityId from route parameters
     const attractionId = this.route.snapshot.paramMap.get('attractionId')  || '';
-    const attractionAccessibilityId = this.route.snapshot.paramMap.get('attractionAccessibilityId');
+    const attractionAccessibilityId = this.route.snapshot.paramMap.get('attractionAccessibilityId') || '';
     
     if (attractionId && attractionAccessibilityId) {
       this.attractionAccessibilityService.getAttractionAccessibilityByAttractionIdAndId(+attractionId, +attractionAccessibilityId)

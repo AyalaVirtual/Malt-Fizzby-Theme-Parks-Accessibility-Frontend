@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { ParkService } from '../parks/park.service';
 import { ParkAccessibilityService } from '../park-accessibility/park-accessibility.service';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ export type Park = {
 
 
 export type ParkAccessibility = {
-  id: number;
+  id: any;
   rentalLocations: string[];
   wheelchairReplacementLocations: string[];
   breakLocations: string[];
@@ -40,13 +40,13 @@ export type ParkAccessibility = {
 export class ParkPreviewComponent {
   @Input() park: any;
   @Input() parkAccessibility: any;
-  
+
 
   constructor(private parkAccessibilityService : ParkAccessibilityService, private route: ActivatedRoute) {}
 
 
   getParkAccessibilityByParkIdAndId(parkId: any, parkAccessibilityId : any) {
-    this.parkAccessibilityService.getParkAccessibilityByParkIdAndId(+parkId, +parkAccessibilityId)
+    this.parkAccessibilityService.getParkAccessibilityByParkIdAndId(parkId, parkAccessibilityId)
       .subscribe((parkAccessibility) => {
         this.parkAccessibility = parkAccessibility.data;
       });

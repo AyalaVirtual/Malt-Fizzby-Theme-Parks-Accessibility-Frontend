@@ -6,7 +6,7 @@ import { AttractionService } from "./attraction.service";
 
 
 export type Attraction = {
-  id : number;
+  id : any;
   name : String;
   imageUrl : String;
   description : String;
@@ -37,10 +37,12 @@ export class AttractionsComponent implements OnInit {
     */
     const parkId = this.route.snapshot.paramMap.get('parkId')  || '';
 
-    this.fetchAttractions(+parkId);
+    this.fetchAttractions(parkId);
+
+    console.log(parkId);
 
     if (parkId) {
-      this.attractionService.getAllAttractionsByParkId(+parkId)
+      this.attractionService.getAllAttractionsByParkId(parkId)
         .subscribe((attraction) => {
           this.attraction = attraction.data;
         });
@@ -51,8 +53,8 @@ export class AttractionsComponent implements OnInit {
   /* 
     This method fetches the attractions by calling the getAllAttractionsByParkId() function from the attraction service.  This returns an observable that the .subscribe() method is used to subscribe to so that when a response is received, the attractions property of the component is assigned the data retrieved from the response.
   */
-  fetchAttractions(parkId : number) : void {
-    this.attractionService.getAllAttractionsByParkId(+parkId).subscribe(
+  fetchAttractions(parkId : any) : void {
+    this.attractionService.getAllAttractionsByParkId(parkId).subscribe(
       (response : any) => {
         this.attractions = response.data;
       }
