@@ -1,6 +1,6 @@
-<a routerLink="/parks/{{park?.id}}/parkaccessibility/{{parkAccessibility?.id}}">
+<a [routerLink]="['/parks',park?.id,'parkaccessibility',parkAccessibility?.id]">
     <img src="{{park?.imageUrl}}" alt="{{park?.name}}" class="park-image" >
-    <p>{{ park?.nam}}</p>
+    <p>{{park?.name}}</p>
 </a>
 
 

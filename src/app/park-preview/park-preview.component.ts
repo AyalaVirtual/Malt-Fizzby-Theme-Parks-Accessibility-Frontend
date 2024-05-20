@@ -16,7 +16,6 @@ export type Park = {
 
 
 export type ParkAccessibility = {
-  // Define the structure of your ParkAccessibility model based on your API response
   id: number;
   rentalLocations: string[];
   wheelchairReplacementLocations: string[];
@@ -29,6 +28,7 @@ export type ParkAccessibility = {
   serviceAnimalReliefAreas: string[];
   companionRestroomLocations: string[];
   firstAidLocations: string;
+  park: Park;
 }
 
 
@@ -42,18 +42,11 @@ export class ParkPreviewComponent {
   @Input() parkAccessibility: any;
   
 
-  constructor(private parkService : ParkService, private route: ActivatedRoute) {}
+  constructor(private parkAccessibilityService : ParkAccessibilityService, private route: ActivatedRoute) {}
 
 
-  // get parkAccessibilityId() {
-  //   console.log('Park ID:', this.park?.id);
-  //   console.log('Park Accessibility ID:', this.parkAccessibility?.id);
-  //   return this.park?.id.parkAccessibility?.id;
-  // }
-
-
-  getParkAccessibilityByParkIdAndId(parkId: number, parkAccessibilityId : number) {
-    this.parkService.getParkAccessibilityByParkIdAndId(+parkId, +parkAccessibilityId)
+  getParkAccessibilityByParkIdAndId(parkId: any, parkAccessibilityId : any) {
+    this.parkAccessibilityService.getParkAccessibilityByParkIdAndId(+parkId, +parkAccessibilityId)
       .subscribe((parkAccessibility) => {
         this.parkAccessibility = parkAccessibility.data;
       });

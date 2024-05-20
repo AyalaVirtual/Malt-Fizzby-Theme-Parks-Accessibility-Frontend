@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 // Any time HTTP is used, this must be imported 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Park } from '../parks/parks.component';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { ParamMap } from '@angular/router';
+import { EMPTY } from 'rxjs'; // Import EMPTY observable
 
 
 // This means the app is already aware of it, so it's already available 
@@ -14,7 +17,7 @@ export class AttractionService {
   private apiUrl : string = 'http://localhost:8080/api';
 
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient, private route : ActivatedRoute) { }
   
 
   /* 
@@ -35,6 +38,20 @@ export class AttractionService {
 
   getAttractionByParkIdAndId(parkId : number, attractionId : number) : Observable<any> {
     return this.http.get(`${this.apiUrl}/parks/${parkId}/attractions/${attractionId}/`);
+  }
+
+
+  getAttractionAccessibilityByAttractionIdAndId(attractionId : number, attractionAccessibilityId : number) : Observable<any> {
+    return this.route.paramMap.pipe(
+      switchMap((params : ParamMap) => {
+        const parkId = params.get('parkId');
+        if (parkId) {
+          return this.http.get(`${this.apiUrl}/parks/${parkId}/attractions/${attractionId}/attractionaccessibility/${attractionAccessibilityId}/`);
+        } else {
+          return EMPTY; // Return EMPTY observable if parkId is not found
+        }
+      })
+    );
   }
 
 }
