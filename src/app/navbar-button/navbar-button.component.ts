@@ -16,23 +16,15 @@ export class NavbarButtonComponent  {
   constructor(private route: ActivatedRoute) {}
 
 
-  // ngOnInit() {
-  //   // Extract parkId from the current route
-  //   this.route.paramMap.subscribe(params => {
-  //     if (params.has('parkId')) {
-  //       this.parkId = +(params.get('parkId')?.id); // Convert to number
-  //     }
-  //   });
-  // }
+  ngOnInit() {
+    // Extract parkId from the current route
+    this.route.paramMap.subscribe(params => {
 
-
-  // get attractionsUrl(): string | null {
-  //   if (this.parkId) {
-  //     return `/parks/${this.parkId}/attractions`;
-  //   } else {
-  //     return null; // Or provide a default message like 'No Park Selected'
-  //   }
-  // }
-
+      console.log(params);
+      if (params.has('parkId')) {
+        this.parkId = (params.get('parkId'));
+      }
+    });
+  }
 
 }
