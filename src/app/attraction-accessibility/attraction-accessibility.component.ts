@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { AttractionAccessibilityService } from './attraction-accessibility.service';
 import { Attraction } from '../attractions/attractions.component';
 import { Park } from '../parks/parks.component';
+import { AttractionService } from '../attractions/attraction.service';
 
 
 export type AttractionAccessibility = {
-  id : number;
+  id : any;
   mustTransfer : any;
   transferAssistance : any;
   serviceAnimalRestrictions : any;
@@ -23,12 +24,13 @@ export type AttractionAccessibility = {
 })
 export class AttractionAccessibilityComponent implements OnInit {
   // This declares a property to store an attraction's accessibility details 
+  attractions : Attraction[] = [];
   attraction : any;
   attractionAccessibility : any;
   park : any;
 
 
-  constructor(private attractionAccessibilityService : AttractionAccessibilityService, private route : ActivatedRoute) {}
+  constructor(private attractionAccessibilityService : AttractionAccessibilityService, private attractionService : AttractionService, private route : ActivatedRoute) {}
 
 
   ngOnInit() {
@@ -38,17 +40,20 @@ export class AttractionAccessibilityComponent implements OnInit {
     
     if (attractionId && attractionAccessibilityId) {
       this.attractionAccessibilityService
-        .getAttractionAccessibilityByAttractionIdAndId(+attractionId, +attractionAccessibilityId)
+        .getAttractionAccessibilityByAttractionIdAndId(attractionId, attractionAccessibilityId)
           .subscribe((attractionAccessibility) => {
             this.attractionAccessibility = attractionAccessibility.data;
 
+            // This extracts parkId from route parameters
+            const parkId = this.route.snapshot.paramMap.get('parkId') || '';
             // Fetch attraction data
-            this.attractionAccessibilityService
-              .getParkById(attractionId)
+            this.attractionService
+              .getAttractionByParkIdAndId(parkId, attractionId)
                 .subscribe((attraction) => {
                   this.attraction = attraction.data;
 
-                  console.log(attraction);
+                  console.log(this.park);
+                  console.log(this.attraction);
                   console.log(attractionAccessibility);
                 });
           

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { ParamMap } from '@angular/router';
-import { EMPTY } from 'rxjs'; // Import EMPTY observable
+import { EMPTY } from 'rxjs'; // Import EMPTY observable 
 
 
 // This means the app is already aware of it, so it's already available 

@@ -41,13 +41,12 @@ export class AttractionsComponent implements OnInit {
 
     this.fetchAttractions(parkId);
 
-    console.log(parkId);
 
     if (parkId) {
       this.attractionService.
         getAllAttractionsByParkId(parkId)
-          .subscribe((attraction) => {
-            this.attraction = attraction.data;
+          .subscribe((attractions) => {
+            this.attractions = attractions.data;
 
             // Fetch park data
             this.attractionService
@@ -55,7 +54,7 @@ export class AttractionsComponent implements OnInit {
                 this.park = park.data;
   
                 console.log(park);
-                console.log(attraction);
+                console.log(attractions);
               });
 
           });
@@ -72,6 +71,24 @@ export class AttractionsComponent implements OnInit {
         .subscribe((response : any) => {
           this.attractions = response.data;
         });
+  }
+
+
+  getAttractionByParkIdAndId(parkId : any, attractionId : any) {
+    this.attractionService
+        .getAttractionByParkIdAndId(parkId, attractionId)
+          .subscribe((attraction) => {
+            this.attraction = attraction.data;
+          });
+  }
+
+
+  getAttractionAccessibilityByAttractionIdAndId(attractionId : any, attractionAccessibilityId : any) {
+    this.attractionService
+        .getAttractionAccessibilityByAttractionIdAndId(attractionId, attractionAccessibilityId)
+          .subscribe((attractionAccessibility) => {
+            this.attractionAccessibility = attractionAccessibility.data;
+          });
   }
 
 }
