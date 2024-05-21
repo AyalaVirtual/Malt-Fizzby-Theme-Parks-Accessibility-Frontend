@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Park } from '../parks/parks.component';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -8,14 +7,13 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './navbar-button.component.html',
   styleUrls: ['./navbar-button.component.css']
 })
-export class NavbarButtonComponent  {
-  park : any;
+export class NavbarButtonComponent implements OnInit {
   parkId: any | null;
 
 
   constructor(private route: ActivatedRoute) {}
 
-
+  
   ngOnInit() {
     // Extract parkId from the current route
     this.route.paramMap.subscribe(params => {

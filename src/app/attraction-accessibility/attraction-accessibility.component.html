@@ -2,21 +2,30 @@
 <app-navbar-button />
 
 <div class="container">
-    <!-- Add attraction.imageUrl and attraction.name variables to img src and alt attributes -->
-    <img src="{{attraction?.imageUrl}}" alt="{{attraction?.name}}">
+    <div class="image-container">
+        <!-- Add attraction's image URL and name -->
+        <img src="{{attraction?.imageUrl}}" alt="{{attraction?.name}}" class="responsive-image">
+    </div>
 
-    <!-- Add attraction.name variable -->
-    <h1>{{attraction?.name}} Attraction</h1>
+    <div class="content-container">
+        <!-- This adds the attraction's name -->
+        <h1>{{attraction?.name}}</h1>
 
-    <!-- Add attraction.description variable -->
-    <p>Description {{attraction?.description}}</p>
+        <!-- This adds the attraction's description -->
+        <p>{{attraction?.description}}</p>
 
-    <p>Accessibility</p>
-    <ul>
-        <!-- Add '*ngFor="let attractionAccessibilityDetail of attractionAccessibility"' as attribute to li -->
-        <li *ngFor="let detail of attractionAccessibility">
-            <!-- Loop through attributes of attractionAccessibility, if === true, add to li -->
-        </li>
-    </ul>
+
+        <h2>Accessibility Information:</h2>
+
+        <p>Must Be Ambulatory: {{attractionAccessibility?.mustTransfer?.mustBeAmbulatory ? 'Yes' : 'No'}}</p>
+
+        <ul>
+            <!-- Add '*ngFor="let attractionAccessibilityDetail of attractionAccessibility"' as attribute to li -->
+            <li *ngFor="let detail of attractionAccessibility?.mustTransfer">
+                <!-- Loop through attributes of attractionAccessibility, if === true, add to li -->
+            </li>
+        </ul>
+    </div>
+
 </div>
 

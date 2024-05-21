@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ParkService } from '../parks/park.service';
 import { ParkAccessibilityService } from '../park-accessibility/park-accessibility.service';
 import { ActivatedRoute } from '@angular/router';

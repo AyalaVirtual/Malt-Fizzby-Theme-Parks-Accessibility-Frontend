@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AttractionAccessibilityService } from './attraction-accessibility.service';
 import { Attraction } from '../attractions/attractions.component';
@@ -24,10 +24,10 @@ export type AttractionAccessibility = {
 })
 export class AttractionAccessibilityComponent implements OnInit {
   // This declares a property to store an attraction's accessibility details 
+  park : any;
   attractions : Attraction[] = [];
   attraction : any;
   attractionAccessibility : any;
-  park : any;
 
 
   constructor(private attractionAccessibilityService : AttractionAccessibilityService, private attractionService : AttractionService, private route : ActivatedRoute) {}
@@ -43,22 +43,20 @@ export class AttractionAccessibilityComponent implements OnInit {
         .getAttractionAccessibilityByAttractionIdAndId(attractionId, attractionAccessibilityId)
           .subscribe((attractionAccessibility) => {
             this.attractionAccessibility = attractionAccessibility.data;
-
-            // This extracts parkId from route parameters
-            const parkId = this.route.snapshot.paramMap.get('parkId') || '';
-            // Fetch attraction data
-            this.attractionService
-              .getAttractionByParkIdAndId(parkId, attractionId)
-                .subscribe((attraction) => {
-                  this.attraction = attraction.data;
-
-                  console.log(this.park);
-                  console.log(this.attraction);
-                  console.log(attractionAccessibility);
-                });
-          
           });
+
+
+      // This extracts parkId from route parameters
+      const parkId = this.route.snapshot.paramMap.get('parkId') || '';
+      // Fetch attraction data
+      this.attractionService
+        .getAttractionByParkIdAndId(parkId, attractionId)
+          .subscribe((attraction) => {
+            this.attraction = attraction.data;
+
+            console.log(attraction);
+          });
+
     }
   }
-
 }
