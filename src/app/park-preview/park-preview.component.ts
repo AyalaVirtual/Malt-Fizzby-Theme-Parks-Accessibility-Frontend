@@ -46,10 +46,11 @@ export class ParkPreviewComponent {
 
 
   getParkAccessibilityByParkIdAndId(parkId: any, parkAccessibilityId : any) {
-    this.parkAccessibilityService.getParkAccessibilityByParkIdAndId(parkId, parkAccessibilityId)
-      .subscribe((parkAccessibility) => {
-        this.parkAccessibility = parkAccessibility.data;
-      });
+    this.parkAccessibilityService
+      .getParkAccessibilityByParkIdAndId(parkId, parkAccessibilityId)
+        .subscribe((parkAccessibility) => {
+          this.parkAccessibility = parkAccessibility.data;
+        });
   }
 
 }

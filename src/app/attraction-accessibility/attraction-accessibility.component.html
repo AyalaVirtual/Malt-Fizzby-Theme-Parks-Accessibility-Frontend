@@ -4,19 +4,19 @@
 
 <div class="container">
     <!-- Add attraction.imageUrl and attraction.name variables to img src and alt attributes -->
-    <img src="" alt="">
+    <img src="{{attraction?.imageUrl}}" alt="{{attraction?.name}}">
 
     <!-- Add attraction.name variable -->
-    <h1></h1>
+    <h1>{{attraction?.name}} Attraction</h1>
 
     <!-- Add attraction.description variable -->
-    <p></p>
+    <p>Description {{attraction?.description}}</p>
 
     <p>Accessibility</p>
     <ul>
         <!-- Add '*ngFor="let attractionAccessibilityDetail of attractionAccessibility"' as attribute to li -->
-        <li>
-            <!-- For each attribute of attractionAccessibility, if === true, add to li -->
+        <li *ngFor="let detail of attractionAccessibility">
+            <!-- Loop through attributes of attractionAccessibility, if === true, add to li -->
         </li>
     </ul>
 </div>

@@ -1,14 +1,16 @@
 <app-navbar />
 
-<!-- Add park name variable -->
-<h1> List of Attractions</h1>
+<!-- This adds park name variable -->
+<h1>{{park?.name}} List of Attractions</h1>
 
 <!-- Add underline -->
 
 <ul class="attractions-list">
-    <!-- Add '*ngFor="let attraction of attractions"' as attribute to li -->
-    <li >
-        <!-- Add {{attraction.name}} -->
+    <!-- This adds each attraction from park's list of attractions -->
+    <li *ngFor="let attraction of attractions">
+        <a [routerLink]="[attraction?.id,'attractionaccessibility',attractionAccessibility?.id]">
+            {{attraction?.name}}
+        </a>
     </li>
 </ul>
 

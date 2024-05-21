@@ -48,10 +48,11 @@ export class ParksComponent implements OnInit {
     let parkAccessibilityId = this.route.snapshot.paramMap.get('parkAccessibilityId') || '';
     
     if (parkId) {
-      this.parkService.getParkById(parkId)
-        .subscribe((park) => {
-          this.park = park.data;
-      });
+      this.parkService
+        .getParkById(parkId)
+          .subscribe((park) => {
+            this.park = park.data;
+          });
   }
 }
 
@@ -59,20 +60,22 @@ export class ParksComponent implements OnInit {
     This method fetches the parks by calling the getAllParks() function from the park service.  This returns an observable that the .subscribe() method is used to subscribe to so that when a response is received, the parks property of the component is assigned the data retrieved from the response. As a result, whenever a new park is created, the list of parks is updated.
   */
   fetchParks(): void {
-    this.parkService.getAllParks().subscribe(
-      (response : any) => {
-        this.parks = response.data;
-      }
+    this.parkService
+      .getAllParks()
+        .subscribe(
+          (response : any) => {
+            this.parks = response.data;
+          }
     )
   }
 
 
   getParkAccessibilityByParkIdAndId(parkId: any, parkAccessibilityId : any) {
-    this.parkService.getParkAccessibilityByParkIdAndId(parkId, parkAccessibilityId)
-      .subscribe((parkAccessibility) => {
-        this.parkAccessibility = parkAccessibility.data;
-      });
+    this.parkService
+      .getParkAccessibilityByParkIdAndId(parkId, parkAccessibilityId)
+        .subscribe((parkAccessibility) => {
+          this.parkAccessibility = parkAccessibility.data;
+        });
   }
-
 
 }

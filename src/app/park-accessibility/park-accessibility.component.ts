@@ -39,10 +39,22 @@ export class ParkAccessibilityComponent implements OnInit {
     const parkAccessibilityId = this.route.snapshot.paramMap.get('parkAccessibilityId') || '';
 
     if (parkId && parkAccessibilityId) {
-      this.parkAccessibilityService.getParkAccessibilityByParkIdAndId(parkId, parkAccessibilityId)
-        .subscribe((parkAccessibility) => {
-          this.parkAccessibility = parkAccessibility.data;
-        });
+      this.parkAccessibilityService
+        .getParkAccessibilityByParkIdAndId(parkId, parkAccessibilityId)
+          .subscribe((parkAccessibility) => {
+            this.parkAccessibility = parkAccessibility.data;
+
+            // Fetch park data
+            this.parkAccessibilityService
+              .getParkById(parkId)
+                .subscribe((park) => {
+                  this.park = park.data;
+
+                  console.log(park);
+                  console.log(parkAccessibility);
+                });
+            
+          });
     }
   }
   

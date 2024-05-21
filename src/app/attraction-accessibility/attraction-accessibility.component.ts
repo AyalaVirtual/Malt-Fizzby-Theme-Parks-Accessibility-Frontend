@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AttractionAccessibilityService } from './attraction-accessibility.service';
 import { Attraction } from '../attractions/attractions.component';
+import { Park } from '../parks/parks.component';
 
 
 export type AttractionAccessibility = {
@@ -22,7 +23,9 @@ export type AttractionAccessibility = {
 })
 export class AttractionAccessibilityComponent implements OnInit {
   // This declares a property to store an attraction's accessibility details 
+  attraction : any;
   attractionAccessibility : any;
+  park : any;
 
 
   constructor(private attractionAccessibilityService : AttractionAccessibilityService, private route : ActivatedRoute) {}
@@ -34,10 +37,22 @@ export class AttractionAccessibilityComponent implements OnInit {
     const attractionAccessibilityId = this.route.snapshot.paramMap.get('attractionAccessibilityId') || '';
     
     if (attractionId && attractionAccessibilityId) {
-      this.attractionAccessibilityService.getAttractionAccessibilityByAttractionIdAndId(+attractionId, +attractionAccessibilityId)
-        .subscribe((attractionAccessibility) => {
-          this.attractionAccessibility = attractionAccessibility.data;
-        });
+      this.attractionAccessibilityService
+        .getAttractionAccessibilityByAttractionIdAndId(+attractionId, +attractionAccessibilityId)
+          .subscribe((attractionAccessibility) => {
+            this.attractionAccessibility = attractionAccessibility.data;
+
+            // Fetch attraction data
+            this.attractionAccessibilityService
+              .getParkById(attractionId)
+                .subscribe((attraction) => {
+                  this.attraction = attraction.data;
+
+                  console.log(attraction);
+                  console.log(attractionAccessibility);
+                });
+          
+          });
     }
   }
 

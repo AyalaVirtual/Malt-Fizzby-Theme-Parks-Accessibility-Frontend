@@ -26,6 +26,8 @@ export class AttractionsComponent implements OnInit {
   // This declares a property to store a park's accessibility details 
   attractions : Attraction[] = [];
   attraction : any;
+  attractionAccessibility: any;
+  park : any;
 
 
   constructor(private attractionService : AttractionService, private route : ActivatedRoute) {}
@@ -42,10 +44,21 @@ export class AttractionsComponent implements OnInit {
     console.log(parkId);
 
     if (parkId) {
-      this.attractionService.getAllAttractionsByParkId(parkId)
-        .subscribe((attraction) => {
-          this.attraction = attraction.data;
-        });
+      this.attractionService.
+        getAllAttractionsByParkId(parkId)
+          .subscribe((attraction) => {
+            this.attraction = attraction.data;
+
+            // Fetch park data
+            this.attractionService
+              .getParkById(parkId).subscribe((park) => {
+                this.park = park.data;
+  
+                console.log(park);
+                console.log(attraction);
+              });
+
+          });
     }
   }
 
@@ -54,11 +67,11 @@ export class AttractionsComponent implements OnInit {
     This method fetches the attractions by calling the getAllAttractionsByParkId() function from the attraction service.  This returns an observable that the .subscribe() method is used to subscribe to so that when a response is received, the attractions property of the component is assigned the data retrieved from the response.
   */
   fetchAttractions(parkId : any) : void {
-    this.attractionService.getAllAttractionsByParkId(parkId).subscribe(
-      (response : any) => {
-        this.attractions = response.data;
-      }
-    )
+    this.attractionService
+      .getAllAttractionsByParkId(parkId)
+        .subscribe((response : any) => {
+          this.attractions = response.data;
+        });
   }
 
 }

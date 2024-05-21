@@ -3,8 +3,8 @@
 <!-- Change image depending on park name -->
 <div class="img-container"></div>
 
-<!-- Add {{ park.name }}  -->
-<h1> Park Accessibility Information</h1>
+<!-- Add park name  -->
+<h1>{{park?.name}} Accessibility Information</h1>
 
 <p id="intro">
     Guests are encouraged to download the free mobile app to their smartphone or tablet prior to their visit. This app provides access to information including real-time attraction wait times, entertainment times, and lets you make dining reservations. Additional information about services for Guests with disabilities can be found by visiting the website, which also offers a chat feature.
@@ -25,8 +25,9 @@
             </p>
             <p><strong>Wheelchair Replacement Locations:</strong></p>
             <ul>
-                <li>
+                <li *ngFor="let location of parkAccessibility?.wheelchairReplacementLocations">
                     <!-- Insert wheelchairReplacementLocations variable -->
+                    {{location}}
                 </li>
             </ul>
 
