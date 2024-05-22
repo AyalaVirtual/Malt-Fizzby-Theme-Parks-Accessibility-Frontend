@@ -1,18 +1,21 @@
 <app-navbar />
 
-<!-- This adds park name variable -->
 <h1>{{park?.name}} List of Attractions</h1>
 
-<!-- Add underline -->
+<div class="underline-container">
+    <img src="../assets/images/underline-w-star-removebg.png" id="underline">
+</div>
 
-<ul class="attractions-list">
-    <!-- This adds each attraction from park's list of attractions -->
-    <li *ngFor="let attraction of attractions">
-        <a [routerLink]="[attraction?.id,'attractionaccessibility',attraction?.attractionAccessibility?.id]">
-            {{attraction?.name}}
-        </a>
-    </li>
-</ul>
+<div class="attractions-container">
+    <ul class="attractions-list">
+        <!-- This loops through the park's list of attractions and adds each attraction as a list item -->
+        <li *ngFor="let attraction of attractions">
+            <a [routerLink]="[attraction?.id,'attractionaccessibility',attraction?.attractionAccessibility?.id]">
+                {{attraction?.name}}
+            </a>
+        </li>
+    </ul>
+</div>
 
 
 <!-- Add logic (maybe ngIf statement) to embed different map based on park.name  -->

@@ -3,37 +3,35 @@
 
 <div class="container">
     <div class="image-container">
-        <!-- Add attraction's image URL and name -->
         <img src="{{attraction?.imageUrl}}" alt="{{attraction?.name}}" class="responsive-image">
     </div>
 
     <div class="content-container">
-        <!-- This adds the attraction's name -->
         <h1>{{attraction?.name}}</h1>
 
-        <!-- This adds the attraction's description -->
         <p>{{attraction?.description}}</p>
 
         <h2>Accessibility Information:</h2>
 
         <div class="columns">
             <div class="column">
-              <ul>
-                <!-- This loops through the attributes of attractionAccessibility and adds them as a list item -->
-                <li *ngFor="let attr of displayedAttributesColumn1">
-                  {{ attr.key }}: {{ attr.value }}
-                </li>
-              </ul>
+                <ul>
+                    <!-- This loops through the attributes of attractionAccessibility and adds them as a list item -->
+                    <li *ngFor="let attr of displayedAttributesColumn1">
+                        {{ attr.key }}: {{ attr.value }}
+                    </li>
+                </ul>
             </div>
-            <div class="column">
-              <ul>
-                <!-- This loops through the attributes of attractionAccessibility and adds them as a list item -->
-                <li *ngFor="let attr of displayedAttributesColumn2">
-                  {{ attr.key }}: {{ attr.value }}
-                </li>
-              </ul>
-            </div>
-          </div>
 
+            <div class="column">
+                <ul>
+                    <!-- This loops through the attributes of attractionAccessibility and adds them as a list item -->
+                    <li *ngFor="let attr of displayedAttributesColumn2">
+                        {{ attr.key }}: {{ attr.value }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
