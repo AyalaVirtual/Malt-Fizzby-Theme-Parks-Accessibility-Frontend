@@ -14,18 +14,26 @@
         <!-- This adds the attraction's description -->
         <p>{{attraction?.description}}</p>
 
-
         <h2>Accessibility Information:</h2>
 
-        <p>Must Be Ambulatory: {{attractionAccessibility?.mustTransfer?.mustBeAmbulatory ? 'Yes' : 'No'}}</p>
-
-        <ul>
-            <!-- Add '*ngFor="let attractionAccessibilityDetail of attractionAccessibility"' as attribute to li -->
-            <li *ngFor="let detail of attractionAccessibility?.mustTransfer">
-                <!-- Loop through attributes of attractionAccessibility, if === true, add to li -->
-            </li>
-        </ul>
-    </div>
+        <div class="columns">
+            <div class="column">
+              <ul>
+                <!-- This loops through the attributes of attractionAccessibility and adds them as a list item -->
+                <li *ngFor="let attr of displayedAttributesColumn1">
+                  {{ attr.key }}: {{ attr.value }}
+                </li>
+              </ul>
+            </div>
+            <div class="column">
+              <ul>
+                <!-- This loops through the attributes of attractionAccessibility and adds them as a list item -->
+                <li *ngFor="let attr of displayedAttributesColumn2">
+                  {{ attr.key }}: {{ attr.value }}
+                </li>
+              </ul>
+            </div>
+          </div>
 
 </div>
 

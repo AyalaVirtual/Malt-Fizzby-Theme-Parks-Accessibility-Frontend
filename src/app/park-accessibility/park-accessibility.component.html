@@ -3,7 +3,6 @@
 <!-- Change image depending on park name -->
 <div class="img-container"></div>
 
-<!-- Add park name  -->
 <h1>{{park?.name}} Accessibility Information</h1>
 
 <p id="intro">
@@ -25,8 +24,8 @@
             </p>
             <p><strong>Wheelchair Replacement Locations:</strong></p>
             <ul>
+                <!-- This loops through the array of wheelchair replacement locations and displays them as list items -->
                 <li *ngFor="let location of parkAccessibility?.wheelchairReplacementLocations">
-                    <!-- Insert wheelchairReplacementLocations variable -->
                     {{location}}
                 </li>
             </ul>
@@ -40,8 +39,9 @@
             
             <p><strong>Rental Locations:</strong></p>
             <ul>
-                <li>
-                    <!-- insert rentalLocations variable -->
+                <!-- This loops through the array of rental locations and displays them as list items -->
+                <li *ngFor="let location of parkAccessibility?.rentalLocations">
+                    {{ location }}
                 </li>
 
                 <ul>
@@ -150,8 +150,18 @@
 
             <strong>BREAK LOCATIONS:</strong>
             <p>All Parks: First Aid and quick service restaurant seating areas (during non-peak periods)</p>
-            <!-- Insert firstAid variable -->
-            <!-- Insert breakLocations variable -->
+            <ul>
+                <!-- This loops through the array of break locations and displays them as list items -->
+                <li *ngFor="let location of parkAccessibility?.breakLocations">
+                    {{ location }}
+                </li>
+
+                <li>
+                    First Aid Locations: {{ parkAccessibility?.firstAidLocations }}
+                </li>
+            </ul>
+                  
+            
 
             <strong>SERVICE ANIMALS:</strong>
             <p>
@@ -177,8 +187,9 @@
                 <li>
                     Due to the nature of some attractions, service animals may not be permitted to ride. Please ask a Cast Member at these locations about available options, including Rider Switch with a member of your party or a portable kennel.
                     <ul>
-                        <li>
-                            <!-- Insert serviceAnimalRestrictions_Ride variable -->
+                        <!-- This loops through the array of locations with service animal ride restrictions and displays them as list items -->
+                        <li *ngFor="let location of parkAccessibility?.serviceAnimalRestrictions_Ride">
+                            {{ location }}
                         </li>
                     </ul>
                 </li>
@@ -187,8 +198,9 @@
                 <li>
                     Guests with service animals should check with a host for attraction and boarding information at the following locations:
                     <ul>
-                        <li>
-                            <!-- Insert serviceAnimalRestrictions_Board variable -->
+                        <!-- This loops through the array of locations with service animal boarding restrictions and displays them as list items -->
+                        <li *ngFor="let location of parkAccessibility?.serviceAnimalRestrictions_Board">
+                            {{ location }}
                         </li>
                     </ul>
                 </li>     
@@ -206,8 +218,9 @@
                 <li>
                     Service animals are permitted to use any open outdoor area for relief with the request that the owner picks up after the animal and leaves the area clean. There are also designated service animal relief areas which are located at:
                     <ul>
-                        <li>
-                            <!-- Insert serviceAnimalReliefAreas variable -->
+                        <!-- This loops through the array of designated service animal relief areas and displays them as list items -->
+                        <li *ngFor="let location of parkAccessibility?.serviceAnimalReliefAreas">
+                            {{ location }}
                         </li>
                     </ul>
                 </li>
@@ -224,8 +237,9 @@
             </p>
             <ul>
                 <p><strong>Stationary Braille Map Locations:</strong></p>
-                <li>
-                    <!-- Insert stationaryBrailleMapLocations variable -->
+                <!-- This loops through the array of stationary Braille map locations and displays them as list items -->
+                <li *ngFor="let location of parkAccessibility?.stationaryBrailleMapLocations">
+                    {{ location }}
                 </li>
             </ul>
              
@@ -244,8 +258,9 @@
                     <strong>Handheld Captioning</strong> displays on-screen text of narrations, spoken dialogue, or music at specific Theme Park attractions and shows. For select services above, we suggest that you bring your own headphones, induction loop, or other accessories as the device has a standard headphone jack. For a list of locations where these services are available, visit the website.
                     <p><strong>Guest Relations Locations:</strong></p>
                     <ul>
-                        <li>
-                            <!-- Insert guestRelationsLocations variable -->
+                        <!-- This loops through the array of guest relations locations and displays them as list items -->
+                        <li *ngFor="let location of parkAccessibility?.guestRelationsLocations">
+                            {{ location }}
                         </li>
                     </ul>
                 </li>
@@ -255,10 +270,10 @@
             <p>
                 Malt Fizzby World® Resort provides Sign Language interpretation for Guests at specific live Theme Park shows on a rotating basis as indicated below:
             </p>
-            <p><strong>Sign Language Interpretation:</strong></p>
+            <p><strong>Sign Language Interpretation Schedule:</strong></p>
             <ul>
                 <li>
-                    <!-- Insert signLanguageSchedule variable -->
+                    {{ parkAccessibility?.signLanguageSchedule }}
                 </li>
             </ul>
             <p>
@@ -288,8 +303,9 @@
                     </p>
                     <p><strong>Companion Restroom Locations:</strong></p>
                     <ul>
-                        <li>
-                            <!-- Insert companionRestroomLocations variable -->
+                        <!-- This loops through the array of companion restroom locations and displays them as list items -->
+                        <li *ngFor="let location of parkAccessibility?.companionRestroomLocations">
+                            {{ location }}
                         </li>
                     </ul>
                 </li>
@@ -314,7 +330,7 @@
                     <p><strong>First Aid Locations:</strong></p>
                     <ul>
                         <li>
-                            <!-- Insert firstAidLocations variable -->
+                            {{ parkAccessibility?.firstAidLocations }}
                         </li>
                     </ul>
                 </li>

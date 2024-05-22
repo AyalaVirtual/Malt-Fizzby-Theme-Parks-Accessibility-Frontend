@@ -7,14 +7,46 @@ import { AttractionService } from '../attractions/attraction.service';
 
 
 export type AttractionAccessibility = {
-  id : any;
-  mustTransfer : any;
-  transferAssistance : any;
-  serviceAnimalRestrictions : any;
-  assistiveDevices : any;
-  sensoryExperiences : any;
-  attraction : Attraction;
-}
+  id: any;
+  mustTransfer: {
+    mayRemainInWheelchairEcv: boolean;
+    mustBeAmbulatory: boolean;
+    mustTransferFromWheelchairEcv: boolean;
+    mustTransferToWheelchair: boolean;
+    mustTransferToWheelchairThenToRide: boolean;
+  };
+  transferAssistance: {
+    loadUnloadAreas: boolean;
+    wheelchairAccessVehicles: boolean;
+    transferAccessVehicle: boolean;
+    transferDevices: boolean;
+  };
+  serviceAnimalRestrictions: {
+    rideRestrictions: boolean;
+    boardRestrictions: boolean;
+  };
+  assistiveDevices: {
+    assistiveListening: boolean;
+    audioDescription: boolean;
+    handheldCaptioning: boolean;
+    signLanguage: boolean;
+    videoCaptioning: boolean;
+  };
+  sensoryExperience: {
+    scentSmell: boolean;
+    lightingEffects: boolean;
+    loudNoises: boolean;
+    periodsOfDarkness: boolean;
+    bumpy: boolean;
+    fast: boolean;
+    liftsOffGround: boolean;
+    wet: boolean;
+    elementOfSurprise: string;
+    typeOfRestraint: string;
+    tripTime: string;
+  };
+  attraction: Attraction;
+};
 
 
 @Component({
@@ -23,11 +55,13 @@ export type AttractionAccessibility = {
   styleUrls: ['./attraction-accessibility.component.css']
 })
 export class AttractionAccessibilityComponent implements OnInit {
-  // This declares a property to store an attraction's accessibility details 
   park : any;
   attractions : Attraction[] = [];
   attraction : any;
   attractionAccessibility : any;
+  displayedAttributes: { key: string, value: any }[] = [];
+  displayedAttributesColumn1: { key: string, value: any }[] = [];
+  displayedAttributesColumn2: { key: string, value: any }[] = [];
 
 
   constructor(private attractionAccessibilityService : AttractionAccessibilityService, private attractionService : AttractionService, private route : ActivatedRoute) {}
@@ -43,6 +77,8 @@ export class AttractionAccessibilityComponent implements OnInit {
         .getAttractionAccessibilityByAttractionIdAndId(attractionId, attractionAccessibilityId)
           .subscribe((attractionAccessibility) => {
             this.attractionAccessibility = attractionAccessibility.data;
+
+            console.log(attractionAccessibility.sensoryExperience.elementOfSurprise);
           });
 
 
@@ -55,8 +91,56 @@ export class AttractionAccessibilityComponent implements OnInit {
             this.attraction = attraction.data;
 
             console.log(attraction);
+            // THIS IS HOW TO ACCESS ATTRACTION ACCESSIBILITY EMBEDDED OBJECT ATTRIBUTES 
+            console.log(attraction.data.attractionAccessibility.sensoryExperience.elementOfSurprise);
+
+            this.prepareDisplayedAttributes();
           });
 
     }
+
   }
+
+
+  prepareDisplayedAttributes() {
+    const objectAttributes = [
+      this.attraction.attractionAccessibility.mustTransfer,
+      this.attraction.attractionAccessibility.transferAssistance,
+      this.attraction.attractionAccessibility.serviceAnimalRestrictions,
+      this.attraction.attractionAccessibility.assistiveDevices,
+      this.attraction.attractionAccessibility.sensoryExperience
+    ];
+    
+   
+    // This loops through the embedded object attributes of AttractionAccessibility and pushes them to the displayedAttributes array to be displayed if they are a boolean equal to true,or a string  
+    for (const object of objectAttributes) {
+      for (const key in object) {
+        const value = object[key];
+
+        if (typeof value === 'boolean' && value === true) {
+          this.displayedAttributes.push({ key: this.splitCamelCase(key), value: 'Yes' });
+
+        } else if (typeof value === 'string' && value.trim() !== '')  {
+          this.displayedAttributes.push({ key: this.splitCamelCase(key), value });
+        }
+
+        // This splits the attraction's accessibility details into 2 equal columns to be displayed side by side 
+        const halfLength = Math.ceil(this.displayedAttributes.length / 2);
+        this.displayedAttributesColumn1 = this.displayedAttributes.slice(0, halfLength);
+        this.displayedAttributesColumn2 = this.displayedAttributes.slice(halfLength);
+
+      }
+    }
+  }
+
+
+  // This formats the names of the embedded object attributes of AttractionAccessibility 
+  splitCamelCase(key: string): string {
+    return key
+      // Add space between camelCase words
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      // Capitalize the first letter
+      .replace(/^./, str => str.toUpperCase());
+  }
+
 }

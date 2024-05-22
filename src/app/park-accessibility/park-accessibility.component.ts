@@ -51,7 +51,15 @@ export class ParkAccessibilityComponent implements OnInit {
                   this.park = park.data;
 
                   console.log(park);
+                  console.log(park.data.parkAccessibility.firstAidLocations);
+
+                  const parkAccessibility = park.data.parkAccessibility;
                   console.log(parkAccessibility);
+
+                  const firstAidLocationsArray : string[] = parkAccessibility.firstAidLocations.split(',');
+                  console.log(firstAidLocationsArray);
+                  const signLanguageScheduleArray : string[] = parkAccessibility.signLanguageSchedule.split(',');
+                  console.log(signLanguageScheduleArray);
                 });
             
           });
