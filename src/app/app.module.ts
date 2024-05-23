@@ -10,6 +10,7 @@ import { AttractionsComponent } from './attractions/attractions.component';
 import { AttractionAccessibilityComponent } from './attraction-accessibility/attraction-accessibility.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarButtonComponent } from './navbar-button/navbar-button.component';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { NavbarButtonComponent } from './navbar-button/navbar-button.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    LazyLoadImageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

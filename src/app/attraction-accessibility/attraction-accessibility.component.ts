@@ -77,8 +77,6 @@ export class AttractionAccessibilityComponent implements OnInit {
         .getAttractionAccessibilityByAttractionIdAndId(attractionId, attractionAccessibilityId)
           .subscribe((attractionAccessibility) => {
             this.attractionAccessibility = attractionAccessibility.data;
-
-            console.log(attractionAccessibility.sensoryExperience.elementOfSurprise);
           });
 
 

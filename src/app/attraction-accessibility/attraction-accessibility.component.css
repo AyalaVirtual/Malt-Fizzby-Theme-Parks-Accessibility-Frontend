@@ -24,6 +24,7 @@ app-navbar {
     max-height: 100%; /* Prevents the image from exceeding container's height */
     object-fit: contain; /* Ensures the image scales correctly */
     border-radius: 25px;
+    border: 2px #05254D solid;
 }
 
 .content-container {

@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="image-container">
-        <img src="{{attraction?.imageUrl}}" alt="{{attraction?.name}}" class="responsive-image">
+        <img src="{{attraction?.imageUrl}}" [lazyLoad]="attraction?.imageUrl" alt="{{attraction?.name}}" class="responsive-image">
     </div>
 
     <div class="content-container">

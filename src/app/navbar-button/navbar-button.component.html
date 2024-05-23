@@ -8,9 +8,9 @@
 
 
     <a [routerLink]="['/parks',parkId,'attractions']">
-        <!-- Create and use variable for button img src attribute to change for each park -->
+        <!-- This changes the button icon image for each park -->
         <button>
-            View <img src="../assets/images/magic-kingdom-icon.png" alt="button icon" id="button-img"> Attractions
+            View <img src="{{imgUrl}}" alt="{{park.name}}" id="button-img"> Attractions
         </button>
     </a>
 </nav>
