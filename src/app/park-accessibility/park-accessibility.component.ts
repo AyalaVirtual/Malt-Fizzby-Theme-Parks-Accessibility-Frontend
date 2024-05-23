@@ -28,6 +28,8 @@ export type ParkAccessibility = {
 export class ParkAccessibilityComponent implements OnInit {
   park : any;
   parkAccessibility : any;
+  // This is for the header image 
+  imgUrl: string = '';
 
 
   constructor(private parkAccessibilityService : ParkAccessibilityService, private route : ActivatedRoute) {}
@@ -50,20 +52,41 @@ export class ParkAccessibilityComponent implements OnInit {
                 .subscribe((park) => {
                   this.park = park.data;
 
-                  console.log(park);
-                  console.log(park.data.parkAccessibility.firstAidLocations);
+                  this.setBackgroundImage();
 
                   const parkAccessibility = park.data.parkAccessibility;
-                  console.log(parkAccessibility);
 
                   const firstAidLocationsArray : string[] = parkAccessibility.firstAidLocations.split(',');
-                  console.log(firstAidLocationsArray);
                   const signLanguageScheduleArray : string[] = parkAccessibility.signLanguageSchedule.split(',');
-                  console.log(signLanguageScheduleArray);
                 });
             
           });
     }
   }
+
+
+  // This sets the header image depending on the park's name 
+  setBackgroundImage(): void {
+    if (this.park) {
+      switch (this.park.name) {
+        case 'Enchanted Realm':
+          this.imgUrl = 'https://drive.google.com/thumbnail?id=1yNwfgmo7WQ4Z9znTldkFu-NKJbBhUPPk&sz=w1000';
+          break;
+        case 'Expedition Isle':
+          this.imgUrl = 'https://drive.google.com/thumbnail?id=1cHXfvAN8HS4NQZVnTFeUquxcvugK6GWx&sz=w1000';
+          break;
+        case 'Mystical Forest':
+          this.imgUrl = 'https://drive.google.com/thumbnail?id=1E36CrmW3crHFxS6xVaF-qwausGTKYqkP&sz=w1000';
+          break;
+        case 'Fantasy Galaxy':
+          this.imgUrl = 'https://drive.google.com/thumbnail?id=1n06t4Tn28lZC23lBUoQWTXlMspJFO4_G&sz=w1000';
+          break;
+        default:
+          this.imgUrl = 'https://drive.google.com/thumbnail?id=10umzjm8eA58DERZZL6zMzfzleGrUQRiy&sz=w1000';
+          break;
+      }
+    }
+  }
+
   
 }

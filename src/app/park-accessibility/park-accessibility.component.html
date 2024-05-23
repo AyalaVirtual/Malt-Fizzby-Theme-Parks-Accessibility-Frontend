@@ -1,7 +1,11 @@
 <app-navbar-button></app-navbar-button>
 
-<!-- Change image depending on park name -->
-<div class="img-container"></div>
+<!-- This changes the header image depending on the park's name -->
+<div class="container">
+    <div class="img-container" [ngStyle]="{'background-image': 'url(' + {imgUrl} + ')'}">
+        <img src={{imgUrl}} alt="">
+    </div>
+</div>
 
 <h1>{{park?.name}} Accessibility Information</h1>
 
@@ -287,7 +291,7 @@
             
             <strong>RESTROOMS:</strong>
             <p>
-                Restrooms are available throughout Walt Disney World® Resort. Most restrooms contain baby changing stations. Multi-stall restroom facilities are available in addition to single-stall companion restroom facilities.
+                Restrooms are available throughout Malt Fizzby World® Resort. Most restrooms contain baby changing stations. Multi-stall restroom facilities are available in addition to single-stall companion restroom facilities.
             </p>
             <ul>
                 <li>
