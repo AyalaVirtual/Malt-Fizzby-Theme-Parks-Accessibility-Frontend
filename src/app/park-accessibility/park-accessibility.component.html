@@ -2,9 +2,7 @@
 
 <!-- This changes the header image depending on the park's name -->
 <div class="container">
-    <div class="img-container" [ngStyle]="{'background-image': 'url(' + {imgUrl} + ')'}">
-        <img src={{imgUrl}} alt="">
-    </div>
+    <div class="img-container" [ngStyle]="{'background-image': 'url(' + imgUrl + ')'}"></div>
 </div>
 
 <h1>{{park?.name}} Accessibility Information</h1>
