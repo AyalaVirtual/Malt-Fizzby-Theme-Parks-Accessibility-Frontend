@@ -15,7 +15,7 @@
 
 h1 {
     text-align: center;
-    margin: 70px;
+    margin: 100px;
 }
 
 #intro {
@@ -33,6 +33,7 @@ p {
     grid-template-columns: 1fr 1fr; /* Defines two columns of equal width */
     gap: 10px; /* Adds spacing between columns */
     margin: 50px;
+    margin-bottom: 100px;
 }
   
 .column1, .column2 {
@@ -45,8 +46,5 @@ ul, li {
     margin-bottom: 10px;
 }
 
-.map {
-    margin-top: 100px;
-    margin-bottom: 100px;
-}
+
   

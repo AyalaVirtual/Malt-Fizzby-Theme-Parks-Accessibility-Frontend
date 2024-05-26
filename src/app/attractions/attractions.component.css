@@ -4,12 +4,11 @@ h1 {
 }
 
 .underline-container {
-    text-align: center;
-    margin-bottom: 50px;
+    text-align: center; 
 }
 
 .attractions-container {
-    margin: 0 50px;
+    margin: 50px 50px 100px 50px;
 }
 
 .attractions-list {

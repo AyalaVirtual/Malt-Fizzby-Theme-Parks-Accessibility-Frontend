@@ -102,28 +102,8 @@ export class ParkAccessibilityComponent implements OnInit {
 
   setMapData(): void {
     if (this.park) {
-      switch (this.park.name) {
-        case 'Enchanted Realm':
-          this.center = [this.park.latitude, this.park.longitude];
-          this.markers = [this.park.latitude, this.park.longitude];
-          break;
-        case 'Expedition Isle':
-          this.center = [this.park.latitude, this.park.longitude];
-          this.markers = [this.park.latitude, this.park.longitude];
-          break;
-        case 'Mystical Forest':
-          this.center = [this.park.latitude, this.park.longitude];
-          this.markers = [this.park.latitude, this.park.longitude];
-          break;
-        case 'Fantasy Galaxy':
-          this.center = [this.park.latitude, this.park.longitude];
-          this.markers = [this.park.latitude, this.park.longitude];
-          break;
-        default:
-          this.center = [this.disneyLat, this.disneyLong]; // Default to Disney World
-          this.markers = [this.disneyLat, this.disneyLong]; // Default to Disney World     
-          break;
-      }
+      this.center = [this.park.latitude, this.park.longitude];
+      this.markers = [[this.park.latitude, this.park.longitude]];
     }
   }
 

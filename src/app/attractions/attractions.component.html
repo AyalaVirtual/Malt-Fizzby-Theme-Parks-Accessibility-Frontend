@@ -19,5 +19,7 @@
 
 
 <!-- This changes the map based on the park's name  -->
-<app-map [center]="[park?.latitude,park.longitude]" [markers]="[park?.latitude,park?.longitude]"></app-map>
+<!-- <app-map [center]="[park?.latitude,park.longitude]" [markers]="[park?.latitude,park?.longitude]"></app-map> -->
+
+<app-map [center]="center" [markers]="markers"></app-map>
 

@@ -53,7 +53,7 @@ export class ParksComponent implements OnInit {
           .subscribe((park) => {
             this.park = park.data;
           });
-  }
+    }
 }
 
   /* 

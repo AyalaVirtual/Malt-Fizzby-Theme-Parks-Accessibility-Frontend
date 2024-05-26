@@ -9,9 +9,6 @@ import 'leaflet-routing-machine';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit, OnChanges {
-  
-  // ** ADD LOGIC TO CHANGE DEFAULT DEPENDING ON PARK ** 
-  // @Input() center: [number, number] = [28.3852, -81.5639]; // Default to Disney World
   @Input() center: [any, any] = [0, 0]; // Default center
   @Input() zoom: number = 14; // Default zoom level
   @Input() markers: [any, any][] = []; // Array of marker coordinates
@@ -19,7 +16,7 @@ export class MapComponent implements OnInit, OnChanges {
   private map!: L.Map;
   private routingControl: any;
 
-
+ 
   ngOnInit(): void {
     this.initMap();
   }
@@ -29,6 +26,11 @@ export class MapComponent implements OnInit, OnChanges {
     if (changes['markers'] && !changes['markers'].firstChange) {
       this.updateMarkers();
       this.updateRouting();
+    }
+
+    // EXPERIMENTAL 
+    if (changes['center'] && !changes['center'].firstChange) {
+      this.map.setView(this.center, this.zoom);
     }
   }
 
@@ -69,18 +71,54 @@ export class MapComponent implements OnInit, OnChanges {
 
   private initRouting(): void {
     if (this.markers.length > 1) {
-      // Example route from one point to another 
-      this.routingControl = L.Routing.control({
+       // Initialize routing control to navigate from one point to another 
+       const routingOptions: L.Routing.RoutingControlOptions = {
         waypoints: this.markers.map(coords => L.latLng(coords[0], coords[1])), // Another point in Disney World
-        routeWhileDragging: true
-      }).addTo(this.map);
+        routeWhileDragging: true,
+
+        // EXPERIMENTAL 
+        router: L.Routing.osrmv1({
+          language: 'en', // Set language for OSRM router 
+          profile: 'foot-walking' // Custom walking profile
+        }),
+        plan: L.Routing.plan(this.markers.map(coords => L.latLng(coords[0], coords[1])), {
+          createMarker: (i: number, waypoint: L.Routing.Waypoint) => {
+            return L.marker(waypoint.latLng, {
+             draggable: true
+            }).bindPopup('Waypoint ' + (i + 1));
+          },
+          language: 'en' // Set language for plan 
+        }),
+        showAlternatives: true,
+        altLineOptions: {
+          styles: [
+            { color: 'black', opacity: 0.15, weight: 9 },
+            { color: 'white', opacity: 0.8, weight: 6 },
+            { color: 'blue', opacity: 0.5, weight: 2 }
+          ],
+          extendToWaypoints: true,
+          missingRouteTolerance: 10
+        },
+      };
+
+      // Create routing control with options
+      this.routingControl = L.Routing.control(routingOptions).addTo(this.map);
     }
   }
 
 
+  // private updateRouting(): void {
+  //   if (this.routingControl && this.map) {
+  //     this.map.removeControl(this.routingControl);
+  //     this.initRouting();
+  // }
+
+
+  // EXPERIMENTAL 
   private updateRouting(): void {
-    if (this.routingControl && this.map) {
-      this.map.removeControl(this.routingControl);
+    if (this.routingControl) {
+      this.routingControl.setWaypoints(this.markers.map(coords => L.latLng(coords[0], coords[1])));
+    } else {
       this.initRouting();
     }
   }
