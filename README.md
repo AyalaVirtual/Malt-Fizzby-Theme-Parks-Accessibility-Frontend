@@ -97,6 +97,13 @@ I acknowledge and respect the intellectual property rights of The Walt Disney Co
 * HTTP requests/endpoints spreadsheet - https://docs.google.com/spreadsheets/d/1xIWKhaml3FHhzpcYROyoGMMztVnEql5rJnGOybD2k2M/edit?usp=sharing 
 
 
+
+## Special Thanks 
+* Jason Gutierrez - After 3 days of me wrestling with routing issues on the frontend, Jason swooped in on the 4th day and helped me solve all of them in a little less than 2 hours. I'm eternally grateful for him reaching out and offering his time and assistance to help me debug the frontend. 
+* [GitHub](https://www.github.com/cptcrunchy) 
+
+
+
 ## Authors
 
 :woman_technologist: Erica Ayala

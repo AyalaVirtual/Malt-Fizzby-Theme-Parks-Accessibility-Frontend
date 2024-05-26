@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'BubblegumSans-Regular';  /* Replace with your font name */
+  src: url('assets/fonts/BubblegumSans-Regular.otf') format('truetype');  /* Adjust path and format */
+}
+
+body {
+  font-family: 'BubblegumSans-Regular';
+}
