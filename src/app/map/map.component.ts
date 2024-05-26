@@ -11,9 +11,10 @@ import 'leaflet-routing-machine';
 export class MapComponent implements OnInit, OnChanges {
   
   // ** ADD LOGIC TO CHANGE DEFAULT DEPENDING ON PARK ** 
-  @Input() center: [number, number] = [28.3852, -81.5639]; // Default to Disney World
+  // @Input() center: [number, number] = [28.3852, -81.5639]; // Default to Disney World
+  @Input() center: [any, any] = [0, 0]; // Default center
   @Input() zoom: number = 14; // Default zoom level
-  @Input() markers: [number, number][] = []; // Array of marker coordinates
+  @Input() markers: [any, any][] = []; // Array of marker coordinates
 
   private map!: L.Map;
   private routingControl: any;
@@ -59,7 +60,7 @@ export class MapComponent implements OnInit, OnChanges {
       // Add new markers
       this.markers.forEach(coords => {
         L.marker(coords).addTo(this.map)
-          .bindPopup('Marker at ' + coords)
+          .bindPopup('Location at ' + coords)
           .openPopup();
       });
     }

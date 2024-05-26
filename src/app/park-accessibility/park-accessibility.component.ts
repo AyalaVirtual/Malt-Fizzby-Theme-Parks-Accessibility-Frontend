@@ -20,6 +20,7 @@ export type ParkAccessibility = {
   park : Park;
 }
 
+
 @Component({
   selector: 'app-park-accessibility',
   templateUrl: './park-accessibility.component.html',
@@ -28,8 +29,15 @@ export type ParkAccessibility = {
 export class ParkAccessibilityComponent implements OnInit {
   park : any;
   parkAccessibility : any;
+
   // This is for the header image 
   imgUrl: string = '';
+
+  // These are for the map 
+  center: [any, any] = [0, 0]; // Default coordinates
+  markers: [any, any][] = [];
+  disneyLat : any = 28.3852;
+  disneyLong : any = -81.5639;
 
 
   constructor(private parkAccessibilityService : ParkAccessibilityService, private route : ActivatedRoute) {}
@@ -58,10 +66,13 @@ export class ParkAccessibilityComponent implements OnInit {
 
                   const firstAidLocationsArray : string[] = parkAccessibility.firstAidLocations.split(',');
                   const signLanguageScheduleArray : string[] = parkAccessibility.signLanguageSchedule.split(',');
+
+                  this.setMapData();
                 });
             
           });
     }
+
   }
 
 
@@ -88,5 +99,33 @@ export class ParkAccessibilityComponent implements OnInit {
     }
   }
 
-  
+
+  setMapData(): void {
+    if (this.park) {
+      switch (this.park.name) {
+        case 'Enchanted Realm':
+          this.center = [this.park.latitude, this.park.longitude];
+          this.markers = [this.park.latitude, this.park.longitude];
+          break;
+        case 'Expedition Isle':
+          this.center = [this.park.latitude, this.park.longitude];
+          this.markers = [this.park.latitude, this.park.longitude];
+          break;
+        case 'Mystical Forest':
+          this.center = [this.park.latitude, this.park.longitude];
+          this.markers = [this.park.latitude, this.park.longitude];
+          break;
+        case 'Fantasy Galaxy':
+          this.center = [this.park.latitude, this.park.longitude];
+          this.markers = [this.park.latitude, this.park.longitude];
+          break;
+        default:
+          this.center = [this.disneyLat, this.disneyLong]; // Default to Disney World
+          this.markers = [this.disneyLat, this.disneyLong]; // Default to Disney World     
+          break;
+      }
+    }
+  }
+
+
 }

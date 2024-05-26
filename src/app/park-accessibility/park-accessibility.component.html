@@ -355,21 +355,6 @@
 </div>
 
 
-<!-- Add logic (maybe ngIf statement) to embed different map based on park.name  -->
-<div class="map">
-    <!-- Magic Kingdom Map -->
-    <iframe width="1250" height="450" src="https://www.openstreetmap.org/export/embed.html?bbox=-81.58012479543687%2C28.417046584436452%2C-81.57830089330673%2C28.418216652722982&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=19/28.41763/-81.57921">View Larger Map</a></small>
-
-    <!-- Hollywood Studios Map: src and href attributes -->
-    <!-- src="https://www.openstreetmap.org/export/embed.html?bbox=-81.57468795776369%2C28.347937211530706%2C-81.54550552368165%2C28.366668959698583&amp;layer=mapnik" 
-    href="https://www.openstreetmap.org/#map=15/28.3573/-81.5601"  -->
-
-    <!-- Animal Kingdom Map: src and href attributes -->
-    <!-- src="https://www.openstreetmap.org/export/embed.html?bbox=-81.60537242889406%2C28.351411898363622%2C-81.57618999481203%2C28.370143033421698&amp;layer=mapnik" 
-    href="https://www.openstreetmap.org/#map=15/28.3608/-81.5908" -->
-
-    <!-- EPCOT Map: src and href attributes -->
-    <!-- src="https://www.openstreetmap.org/export/embed.html?bbox=-81.56331539154054%2C28.36300595443888%2C-81.53413295745851%2C28.38173504322311&amp;layer=mapnik" 
-    href="https://www.openstreetmap.org/#map=15/28.3724/-81.5487" -->
-</div>
+<!-- This changes the map based on the park's name  -->
+<app-map [center]="[park?.latitude,park.longitude]" [markers]="[park?.latitude,park?.longitude]"></app-map>
 

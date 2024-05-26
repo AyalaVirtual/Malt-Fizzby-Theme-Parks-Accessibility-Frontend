@@ -29,6 +29,12 @@ export class AttractionsComponent implements OnInit {
   attractionAccessibility: any;
   park : any;
 
+  // These are for the map 
+  center: [any, any] = [0, 0]; // Default coordinates
+  markers: [any, any][] = [];
+  disneyLat : any = 28.3852;
+  disneyLong : any = -81.5639;
+
 
   constructor(private attractionService : AttractionService, private route : ActivatedRoute) {}
 
@@ -53,8 +59,7 @@ export class AttractionsComponent implements OnInit {
               .getParkById(parkId).subscribe((park) => {
                 this.park = park.data;
   
-                console.log(park);
-                console.log(attractions);
+                this.setMapData();
               });
 
           });
@@ -90,5 +95,34 @@ export class AttractionsComponent implements OnInit {
             this.attractionAccessibility = attractionAccessibility.data;
           });
   }
+    
+
+  setMapData(): void {
+    if (this.park) {
+      switch (this.park.name) {
+        case 'Enchanted Realm':
+          this.center = [this.park.latitude, this.park.longitude];
+          this.markers = [this.park.latitude, this.park.longitude];
+          break;
+        case 'Expedition Isle':
+          this.center = [this.park.latitude, this.park.longitude];
+          this.markers = [this.park.latitude, this.park.longitude];
+          break;
+        case 'Mystical Forest':
+          this.center = [this.park.latitude, this.park.longitude];
+          this.markers = [this.park.latitude, this.park.longitude];
+          break;
+        case 'Fantasy Galaxy':
+          this.center = [this.park.latitude, this.park.longitude];
+          this.markers = [this.park.latitude, this.park.longitude];
+          break;
+        default:
+          this.center = [this.disneyLat, this.disneyLong]; // Default to Disney World
+          this.markers = [this.disneyLat, this.disneyLong]; // Default to Disney World     
+          break;
+      }
+    }
+  }
+  
 
 }
