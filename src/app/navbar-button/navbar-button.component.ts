@@ -49,10 +49,10 @@ export class NavbarButtonComponent implements OnInit {
         case 'Enchanted Realm':
           this.imgUrl = '../assets/images/magic-kingdom-icon.png';
           break;
-        case 'Expedition Isle':
+        case 'Tinseltown Studios':
           this.imgUrl = '../assets/images/hollywood-studios-icon.png';
           break;
-        case 'Mystical Forest':
+        case 'Expedition Isle':
           this.imgUrl = '../assets/images/animal-kingdom-icon.png';
           break;
         case 'Fantasy Galaxy':

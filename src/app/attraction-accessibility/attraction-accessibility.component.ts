@@ -55,10 +55,13 @@ export type AttractionAccessibility = {
   styleUrls: ['./attraction-accessibility.component.css']
 })
 export class AttractionAccessibilityComponent implements OnInit {
+  // These are to store an attraction's associated park, a list of attractions, an individual attraction, and an attraction's accessibility details 
   park : any;
   attractions : Attraction[] = [];
   attraction : any;
   attractionAccessibility : any;
+
+  // These are to store an attraction's accessibility details in 2 equal columns 
   displayedAttributes: { key: string, value: any }[] = [];
   displayedAttributesColumn1: { key: string, value: any }[] = [];
   displayedAttributesColumn2: { key: string, value: any }[] = [];
@@ -67,12 +70,14 @@ export class AttractionAccessibilityComponent implements OnInit {
   constructor(private attractionAccessibilityService : AttractionAccessibilityService, private attractionService : AttractionService, private route : ActivatedRoute) {}
 
 
+  // This method is called when the component is initialized 
   ngOnInit() {
     // This extracts attractionId and attractionAccessibilityId from route parameters
     const attractionId = this.route.snapshot.paramMap.get('attractionId')  || '';
     const attractionAccessibilityId = this.route.snapshot.paramMap.get('attractionAccessibilityId') || '';
     
     if (attractionId && attractionAccessibilityId) {
+      // This fetches an attraction's accessibility details 
       this.attractionAccessibilityService
         .getAttractionAccessibilityByAttractionIdAndId(attractionId, attractionAccessibilityId)
           .subscribe((attractionAccessibility) => {
@@ -80,18 +85,18 @@ export class AttractionAccessibilityComponent implements OnInit {
           });
 
 
-      // This extracts parkId from route parameters
+      // This extracts the associated park's ID from route parameters
       const parkId = this.route.snapshot.paramMap.get('parkId') || '';
-      // Fetch attraction data
+      // This fetches an attraction's data
       this.attractionService
         .getAttractionByParkIdAndId(parkId, attractionId)
           .subscribe((attraction) => {
             this.attraction = attraction.data;
 
-            console.log(attraction);
             // THIS IS HOW TO ACCESS ATTRACTION ACCESSIBILITY EMBEDDED OBJECT ATTRIBUTES 
             console.log(attraction.data.attractionAccessibility.sensoryExperience.elementOfSurprise);
 
+            // This calls the function that adds an attraction's applicable accessibility details to an array to be displayed and splits them into 2 equal columns 
             this.prepareDisplayedAttributes();
           });
 
@@ -100,6 +105,7 @@ export class AttractionAccessibilityComponent implements OnInit {
   }
 
 
+  // This adds an attraction's applicable accessibility details to an array to be displayed and splits them into 2 equal columns 
   prepareDisplayedAttributes() {
     const objectAttributes = [
       this.attraction.attractionAccessibility.mustTransfer,
@@ -135,9 +141,9 @@ export class AttractionAccessibilityComponent implements OnInit {
   // This formats the names of the embedded object attributes of AttractionAccessibility 
   splitCamelCase(key: string): string {
     return key
-      // Add space between camelCase words
+      // This adds space between camelCase words
       .replace(/([a-z])([A-Z])/g, '$1 $2')
-      // Capitalize the first letter
+      // This capitalizes the first letter
       .replace(/^./, str => str.toUpperCase());
   }
 
