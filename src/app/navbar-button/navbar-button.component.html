@@ -10,7 +10,7 @@
     <a [routerLink]="['/parks',parkId,'attractions']">
         <!-- This changes the button icon image for each park -->
         <button>
-            View <img src="{{imgUrl}}" alt="{{park.name}}" id="button-img"> Attractions
+            View <img src="{{imgUrl}}" alt="{{park?.name}}" id="button-img"> Attractions
         </button>
     </a>
 </nav>
