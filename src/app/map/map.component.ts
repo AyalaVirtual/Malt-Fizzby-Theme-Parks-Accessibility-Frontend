@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 
@@ -8,34 +8,33 @@ import 'leaflet-routing-machine';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit, OnChanges {
+export class MapComponent implements OnInit, OnChanges, AfterViewInit  {
   @Input() center: [any, any] = [0, 0]; // Default center
   @Input() zoom: number = 14; // Default zoom level
-  @Input() markers: [any, any][] = []; // Marker coordinates
-  // @Input() markers: {coords: [any, any], name: any}[] = []; // Marker coordinates and names
-  marker: any;
-
+  @Input() markers: [any, any][] = []; // Array of marker coordinates
 
   private map!: L.Map;
   private routingControl: any;
 
- 
   ngOnInit(): void {
-    this.initMap();
-  }
 
+  }
   
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['markers'] && !changes['markers'].firstChange) {
       this.updateMarkers();
-      this.updateRouting();
     }
 
+    // EXPERIMENTAL 
     if (changes['center'] && !changes['center'].firstChange) {
       this.map.setView(this.center, this.zoom);
     }
   }
-
+  
+  ngAfterViewInit(): void {
+    this.updateMarkers();
+    this.initMap();
+  }
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -47,109 +46,54 @@ export class MapComponent implements OnInit, OnChanges {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
 
-    this.updateMarkers();
-    this.initRouting();
   }
 
 
   private updateMarkers(): void {
     if (this.map) {
-      // This clears existing markers
+      // Clear existing markers
       this.map.eachLayer((layer) => {
         if (layer instanceof L.Marker) {
           this.map.removeLayer(layer);
         }
       });
-
-      // This adds new markers
-      this.markers.forEach(coords => {
-        L.marker(coords).addTo(this.map)
-          .bindPopup('Location ' + coords)
-          .openPopup();
-
-        // EXPERIMENTAL 2 
-      // this.markers.forEach(marker => {
-      //   L.marker(marker.coords).addTo(this.map)
-      //     .bindPopup(marker.name)
-      //     .openPopup();
-      });
+      
+      const cordinateset = this.markers.slice(4, 14).map(coords => [coords[0], -coords[1]]);
+      this.initRouting(cordinateset)
     }
   }
 
-
-  private initRouting(): void {
-    if (this.markers.length > 1) {
-       // This initializes routing control to navigate from one point to another 
-       const routingOptions: L.Routing.RoutingControlOptions = {
-
-        waypoints: this.markers.map(coords => L.latLng(coords[0], coords[1])), // Another point in Disney World
-        routeWhileDragging: true,
-
+  private initRouting(cordinateset: any[][]): void {
+        this.routingControl = L.Routing.control({
         router: L.Routing.osrmv1({
           language: 'en', // This sets the language for OSRM router 
           profile: 'foot-walking' // This sets a custom walking profile
         }),
-        plan: L.Routing.plan(this.markers.map(coords => L.latLng(coords[0], coords[1])), {
-          createMarker: (i: number, waypoint: L.Routing.Waypoint) => {
-            return L.marker(waypoint.latLng, {
-             draggable: true
-            }).bindPopup('Waypoint ' + (i + 1));
-          },
-          language: 'en' // This sets the language for plan 
+         collapsible: true,
+         plan: L.Routing.plan([
+           L.latLng(cordinateset[0][0], cordinateset[0][1]),
+           L.latLng(cordinateset[1][0], cordinateset[0][1]),
+           L.latLng(cordinateset[2][0], cordinateset[0][1]),
+           L.latLng(cordinateset[3][0], cordinateset[0][1]),
+           L.latLng(cordinateset[4][0], cordinateset[0][1]),
+           L.latLng(cordinateset[5][0], cordinateset[0][1]),
+           L.latLng(cordinateset[6][0], cordinateset[0][1]),
+           L.latLng(cordinateset[7][0], cordinateset[0][1]),
+         ], {
+          createMarker: function(i, wp, n) {
+            if (i == 0 || i == n - 1) {
+              return L.marker(wp.latLng, {
+                draggable: false // prevent users from changing waypoint position
+              });
+            } else {
+              return false;
+            }
+          }
         }),
-        showAlternatives: true,
-        altLineOptions: {
-          styles: [
-            { color: 'black', opacity: 0.15, weight: 9 },
-            { color: 'white', opacity: 0.8, weight: 6 },
-            { color: 'blue', opacity: 0.5, weight: 2 }
-          ],
-          extendToWaypoints: true,
-          missingRouteTolerance: 10
-        },
-      };
-
-      // This creates routing control with options
-      this.routingControl = L.Routing.control(routingOptions).addTo(this.map);
-    }
+        addWaypoints: false,
+        routeWhileDragging: false
+    }).addTo(this.map); 
+    this.routingControl.spliceWaypoints(0, 2);
   }
-
-
-  private updateRouting(): void {
-    if (this.routingControl) {
-      this.routingControl.setWaypoints(this.markers.map(coords => L.latLng(coords[0], coords[1])));
-    } else {
-      this.initRouting();
-    }
-  }
-
-
-  // EXPERIMENTAL 2 
-  // private initRouting(): void {
-  //   if (this.markers.length > 1) {
-  //     const waypoints = this.markers.map(marker => L.latLng(marker.coords[0], marker.coords[1]));
-
-  //     const customPlan = new L.Routing.Plan(waypoints, {
-  //       createMarker: (i: number, waypoint: L.Routing.Waypoint) => {
-  //         return L.marker(waypoint.latLng).bindPopup(this.markers[i].name);
-  //       }
-  //     });
-
-  //     this.routingControl = L.Routing.control({
-  //       plan: customPlan,
-  //       routeWhileDragging: true
-  //     }).addTo(this.map);
-  //   }
-  // }
-
-  // private updateRouting(): void {
-  //   if (this.routingControl) {
-  //     const waypoints = this.markers.map(marker => L.latLng(marker.coords[0], marker.coords[1]));
-  //     this.routingControl.setWaypoints(waypoints);
-  //   } else {
-  //     this.initRouting();
-  //   }
-  // }
-
 
 }
